@@ -5,6 +5,7 @@ import { api } from "~/utils/api";
 
 export default function Home() {
   const { data } = api.technology.getAll.useQuery();
+
   return (
     <>
       <Head>
@@ -21,7 +22,7 @@ export default function Home() {
             Hazırlanıyor...
           </p>
           <div className="">
-            {data?.map((item) => <div key={item.id}>item.name</div>)}
+            {data?.map((item) => <div key={item.id}>{item.name}</div>)}
           </div>
         </div>
       </main>
