@@ -4,8 +4,7 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
+  const { data } = api.technology.getAll.useQuery();
   return (
     <>
       <Head>
@@ -21,6 +20,9 @@ export default function Home() {
           <p className="text-center text-2xl font-extrabold text-white">
             Hazırlanıyor...
           </p>
+          <div className="">
+            {data?.map((item) => <div key={item.id}>item.name</div>)}
+          </div>
         </div>
       </main>
     </>
