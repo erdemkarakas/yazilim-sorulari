@@ -2,14 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-  relationMode = "prisma"
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
-
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 model Example {
@@ -19,4 +18,24 @@ model Example {
     updatedAt DateTime @updatedAt
 
     @@index([name])
+}
+
+model Technology {
+    id        Int        @id @default(autoincrement())
+    name      String     @unique
+    questions Question[]
+}
+
+model Question {
+    id           Int        @id @default(autoincrement())
+    question     String
+    a            String
+    b            String
+    c            String
+    d            String
+    correct      String
+    language     Technology @relation(fields: [technologyId], references: [id])
+    technologyId Int
+
+    @@index([technologyId])
 }
