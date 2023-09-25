@@ -2,10 +2,14 @@ import Head from "next/head";
 import Link from "next/link";
 
 import { api } from "~/utils/api";
+import TechnologyCard from "../components/TechnologyCard/TechnologyCard";
 
 export default function Home() {
-  const { data } = api.technology.getAll.useQuery();
-
+  const { data: technologies } = api.technology.getAll.useQuery();
+  const { data: questions } = api.questions.getRandom20Questions.useQuery({
+    technologyId: 1,
+    limit: 20,
+  });
   return (
     <>
       <Head>
@@ -21,9 +25,10 @@ export default function Home() {
           <p className="text-center text-2xl font-extrabold text-white">
             Hazırlanıyor...
           </p>
-          <div className="">
-            {data?.map((item) => <div key={item.id}>{item.name}</div>)}
-          </div>
+
+          {technologies
+            ?.filter((item) => item.name === "javascript")
+            .map((item) => <TechnologyCard key={item.id} technology={item} />)}
         </div>
       </main>
     </>
