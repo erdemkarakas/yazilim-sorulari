@@ -26,6 +26,7 @@ model Question {
     c            String
     d            String
     correct      String
+    answerExp    String
     language     Technology @relation(fields: [technologyId], references: [id])
     technologyId Int
 
