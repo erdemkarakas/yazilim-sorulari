@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "@/src/server/api/trpc";
 
 export const questionsRouter = createTRPCRouter({
-  getRandom20Questions: publicProcedure
+  getRandomQuestions: publicProcedure
     .input(z.object({ technologyId: z.number(), limit: z.number().optional() }))
     .query(async ({ ctx, input: { technologyId, limit = 20 } }) => {
       if (!technologyId) {
@@ -35,11 +35,11 @@ export const questionsRouter = createTRPCRouter({
       z.object({
         questionText: z.string(),
         questionCode: z.string().optional(),
-        a: z.string(),
-        b: z.string(),
-        c: z.string(),
-        d: z.string(),
-        correct: z.string(),
+        answerA: z.string(),
+        answerB: z.string(),
+        answerC: z.string(),
+        answerD: z.string(),
+        correctAnswer: z.string(),
         answerExp: z.string().optional(),
         technologyId: z.number(),
       }),
@@ -50,11 +50,11 @@ export const questionsRouter = createTRPCRouter({
         input: {
           technologyId,
           questionText,
-          a,
-          b,
-          c,
-          d,
-          correct,
+          answerA,
+          answerB,
+          answerC,
+          answerD,
+          correctAnswer,
           questionCode = "",
           answerExp = "",
         },
@@ -63,11 +63,11 @@ export const questionsRouter = createTRPCRouter({
           data: {
             technologyId,
             questionText,
-            a,
-            b,
-            c,
-            d,
-            correct,
+            answerA,
+            answerB,
+            answerC,
+            answerD,
+            correctAnswer: correctAnswer,
             questionCode: questionCode || "",
             answerExp: answerExp || "",
           },
@@ -77,50 +77,3 @@ export const questionsRouter = createTRPCRouter({
       },
     ),
 });
-
-// .query(
-//   async ({
-//     ctx,
-//     input: {
-//       questionText,
-//       questionCode,
-//       a,
-//       b,
-//       c,
-//       d,
-//       correct,
-//       answerExp,
-//       technologyId,
-//     },
-//   }) => {
-//     if (
-//       !questionText ||
-//       !questionCode ||
-//       !technologyId ||
-//       !correct ||
-//       !a ||
-//       !b ||
-//       !c ||
-//       !d ||
-//       !technologyId
-//     ) {
-//       throw new Error("question, answer and technologyId are required");
-//     }
-
-//     const newQuestion = await ctx.db.question.create({
-//       data: {
-//         questionText,
-//         questionCode,
-//         a,
-//         b,
-//         c,
-//         d,
-//         correct,
-//         answerExp,
-//         technologyId,
-//       },
-//     });
-
-//     return newQuestion;
-//   },
-// ),

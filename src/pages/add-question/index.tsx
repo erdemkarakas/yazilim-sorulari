@@ -124,11 +124,11 @@ export default function AddQuestion() {
       technologyId: Number(form.watch("technology")),
       questionText: form.watch("questionText"),
       questionCode: form.watch("questionCode"),
-      a: form.watch("answerA"),
-      b: form.watch("answerB"),
-      c: form.watch("answerC"),
-      d: form.watch("answerD"),
-      correct: form.watch("correctAnswer"),
+      answerA: form.watch("answerA"),
+      answerB: form.watch("answerB"),
+      answerC: form.watch("answerC"),
+      answerD: form.watch("answerD"),
+      correctAnswer: form.watch("correctAnswer"),
       answerExp: form.watch("answerExplanation"),
     });
   }

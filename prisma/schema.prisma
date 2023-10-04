@@ -18,17 +18,17 @@ model Technology {
 }
 
 model Question {
-    id           Int        @id @default(autoincrement())
-    questionText String     @db.Text
-    questionCode String     @db.Text
-    a            String     @db.Text
-    b            String     @db.Text
-    c            String     @db.Text
-    d            String     @db.Text
-    correct      String     @db.Text
-    answerExp    String     @db.Text
-    language     Technology @relation(fields: [technologyId], references: [id])
-    technologyId Int
+    id            Int        @id @default(autoincrement())
+    questionText  String     @db.Text
+    questionCode  String     @db.Text
+    answerA       String     @db.Text
+    answerB       String     @db.Text
+    answerC       String     @db.Text
+    answerD       String     @db.Text
+    correctAnswer String     @db.Text
+    answerExp     String     @db.Text
+    language      Technology @relation(fields: [technologyId], references: [id])
+    technologyId  Int
 
     @@index([technologyId])
 }

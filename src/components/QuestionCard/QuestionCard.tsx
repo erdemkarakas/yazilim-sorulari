@@ -106,7 +106,7 @@ const QuestionCard: React.FC<QuestionProps> = ({
         ))}
       </div>
 
-      {anwerExplanation && (
+      {anwerExplanation && true && (
         <div className="mt-4">
           <h3 className="text-lg font-bold">Açıklama</h3>
           <Textarea readOnly defaultValue={anwerExplanation} />

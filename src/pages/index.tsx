@@ -48,7 +48,7 @@ export default function Home() {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [soundsOn, setSoundsOn] = useState(true);
   const { data: technologies } = api.technology.getAll.useQuery();
-  const { data: questions } = api.questions.getRandom20Questions.useQuery({
+  const { data: questions } = api.questions.getRandomQuestions.useQuery({
     technologyId: 1,
     limit: 20,
   });
@@ -66,20 +66,22 @@ export default function Home() {
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#021e6d] to-[#15162c]">
-        <div className="absolute right-20 top-20">
-          <Button
-            className="transition duration-500 hover:scale-125"
-            variant={"outline"}
-          >
-            <Link
-              className="flex flex-row items-center justify-center text-base"
-              href={"/add-question"}
+        {sessionStep != 3 && (
+          <div className="absolute right-20 top-20">
+            <Button
+              className="transition duration-500 hover:scale-125"
+              variant={"outline"}
             >
-              <ArrowUpFromLine className="mr-2 h-4 w-4" />
-              Soru Ekle
-            </Link>
-          </Button>
-        </div>
+              <Link
+                className="flex flex-row items-center justify-center text-base"
+                href={"/add-question"}
+              >
+                <ArrowUpFromLine className="mr-2 h-4 w-4" />
+                Soru Ekle
+              </Link>
+            </Button>
+          </div>
+        )}
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Yazılım <span className="text-[hsl(212,100%,70%)]">Soruları</span>
@@ -178,14 +180,14 @@ export default function Home() {
             </div>
           )}
           {sessionStep == 3 && (
-            <div className="h-2/3 w-2/3">
-              {exampleData.map((question, index) => (
+            <div className="flex w-[900px] flex-col items-center">
+              {questions?.map((question, index) => (
                 <QuestionCard
                   key={index}
-                  technology={Number(question.technology)}
+                  technology={question.technologyId}
                   questionText={question.questionText}
                   questionCode={question.questionCode}
-                  anwerExplanation={question.anwerExplanation}
+                  anwerExplanation={question.answerExp}
                   answerA={question.answerA}
                   answerB={question.answerB}
                   answerC={question.answerC}
@@ -195,25 +197,19 @@ export default function Home() {
                 />
               ))}
 
-              <div className="mt-6 flex justify-between px-2">
-                <button
-                  className="rounded bg-blue-500 px-4 py-2 text-white"
-                  onClick={prevQuestion}
-                >
+              <div className="mt-2 flex items-center justify-evenly space-x-28">
+                <Button variant={"outline"} onClick={prevQuestion}>
                   <div className="flex flex-row items-center justify-center gap-2">
-                    <MdSkipPrevious size={25} color="white" /> Önceki
+                    <MdSkipPrevious size={25} /> Önceki
                   </div>
-                </button>
+                </Button>
 
-                <button
-                  className="rounded bg-blue-500 px-4 py-2 text-white"
-                  onClick={nextQuestion}
-                >
+                <Button variant={"outline"} onClick={nextQuestion}>
                   <div className="flex flex-row items-center justify-center gap-2">
                     Sonra
-                    <MdSkipNext size={25} color="white" />
+                    <MdSkipNext size={25} />
                   </div>
-                </button>
+                </Button>
               </div>
             </div>
           )}
