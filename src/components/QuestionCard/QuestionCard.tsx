@@ -5,13 +5,14 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import "@uiw/react-textarea-code-editor/dist.css";
 import dynamic from "next/dynamic";
+import { Button } from "@/components/ui/button";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
   { ssr: false },
 );
 interface QuestionProps {
-  technology: string;
+  technology: number;
   questionText: string;
   questionCode?: string;
   anwerExplanation?: string;
@@ -58,12 +59,12 @@ const QuestionCard: React.FC<QuestionProps> = ({
   return (
     <div
       className={classNames(
-        "space-y-4 rounded-lg bg-white p-4 px-16 py-10 shadow",
+        "mt-4 h-[80%] w-[80%] space-y-4 overflow-y-auto rounded-lg bg-white p-4 px-16 py-10 shadow-2xl",
         borderColor,
         "transition-colors duration-500",
       )}
     >
-      <Badge variant="outline">{technology.toUpperCase()}</Badge>
+      <Badge variant="outline">{technology == 1 ? "Javascript" : ""}</Badge>
       <h2 className="mb-4 text-lg font-bold">{questionText}</h2>
       {questionCode && (
         <div className="space-y-2">

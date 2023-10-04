@@ -19,14 +19,14 @@ model Technology {
 
 model Question {
     id           Int        @id @default(autoincrement())
-    questionText String
-    questionCode String
-    a            String
-    b            String
-    c            String
-    d            String
-    correct      String
-    answerExp    String
+    questionText String     @db.Text
+    questionCode String     @db.Text
+    a            String     @db.Text
+    b            String     @db.Text
+    c            String     @db.Text
+    d            String     @db.Text
+    correct      String     @db.Text
+    answerExp    String     @db.Text
     language     Technology @relation(fields: [technologyId], references: [id])
     technologyId Int
 

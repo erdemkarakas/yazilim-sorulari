@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import Link from "next/link";
-
+import { Toaster } from "@/components/ui/toaster";
 import { api } from "@/src/lib/api";
 import TechnologyCard from "@/src/components/TechnologyCard/TechnologyCard";
 import QuestionCard from "@/src/components/QuestionCard/QuestionCard";
@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowBigLeft, ArrowLeft, ArrowUpFromLine, Play } from "lucide-react";
+import { ArrowLeft, ArrowUpFromLine, Play } from "lucide-react";
 
 const exampleData = [
   {
@@ -182,7 +182,7 @@ export default function Home() {
               {exampleData.map((question, index) => (
                 <QuestionCard
                   key={index}
-                  technology={question.technology}
+                  technology={Number(question.technology)}
                   questionText={question.questionText}
                   questionCode={question.questionCode}
                   anwerExplanation={question.anwerExplanation}
@@ -218,6 +218,7 @@ export default function Home() {
             </div>
           )}
         </div>
+        <Toaster />
       </main>
     </>
   );

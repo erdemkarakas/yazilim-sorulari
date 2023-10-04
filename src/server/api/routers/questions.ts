@@ -34,57 +34,42 @@ export const questionsRouter = createTRPCRouter({
     .input(
       z.object({
         questionText: z.string(),
-        questionCode: z.string(),
+        questionCode: z.string().optional(),
         a: z.string(),
         b: z.string(),
         c: z.string(),
         d: z.string(),
         correct: z.string(),
-        answerExp: z.string(),
-
+        answerExp: z.string().optional(),
         technologyId: z.number(),
       }),
     )
-    .query(
+    .mutation(
       async ({
         ctx,
         input: {
+          technologyId,
           questionText,
-          questionCode,
           a,
           b,
           c,
           d,
           correct,
-          answerExp,
-          technologyId,
+          questionCode = "",
+          answerExp = "",
         },
       }) => {
-        if (
-          !questionText ||
-          !questionCode ||
-          !technologyId ||
-          !correct ||
-          !a ||
-          !b ||
-          !c ||
-          !d ||
-          !technologyId
-        ) {
-          throw new Error("question, answer and technologyId are required");
-        }
-
         const newQuestion = await ctx.db.question.create({
           data: {
+            technologyId,
             questionText,
-            questionCode,
             a,
             b,
             c,
             d,
             correct,
-            answerExp,
-            technologyId,
+            questionCode: questionCode || "",
+            answerExp: answerExp || "",
           },
         });
 
@@ -92,3 +77,50 @@ export const questionsRouter = createTRPCRouter({
       },
     ),
 });
+
+// .query(
+//   async ({
+//     ctx,
+//     input: {
+//       questionText,
+//       questionCode,
+//       a,
+//       b,
+//       c,
+//       d,
+//       correct,
+//       answerExp,
+//       technologyId,
+//     },
+//   }) => {
+//     if (
+//       !questionText ||
+//       !questionCode ||
+//       !technologyId ||
+//       !correct ||
+//       !a ||
+//       !b ||
+//       !c ||
+//       !d ||
+//       !technologyId
+//     ) {
+//       throw new Error("question, answer and technologyId are required");
+//     }
+
+//     const newQuestion = await ctx.db.question.create({
+//       data: {
+//         questionText,
+//         questionCode,
+//         a,
+//         b,
+//         c,
+//         d,
+//         correct,
+//         answerExp,
+//         technologyId,
+//       },
+//     });
+
+//     return newQuestion;
+//   },
+// ),
