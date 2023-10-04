@@ -74,13 +74,14 @@ export default function Home() {
             <Button
               className="transition duration-500 hover:scale-125"
               variant={"outline"}
+              size={"xl"}
             >
               <Link
                 className="flex flex-row items-center justify-center text-base"
                 href={"/add-question"}
               >
                 <ArrowUpFromLine className="mr-2 h-4 w-4" />
-                Soru Ekle
+                Soru Yükle
               </Link>
             </Button>
           </div>
