@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "@/src/server/api/trpc";
 
 export const questionsRouter = createTRPCRouter({
   getRandom20Questions: publicProcedure

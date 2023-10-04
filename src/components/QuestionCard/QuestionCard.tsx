@@ -1,31 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-import { MdSkipNext, MdSkipPrevious } from "react-icons/md";
-import CodeEditor from "@uiw/react-textarea-code-editor";
 
+import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
+import "@uiw/react-textarea-code-editor/dist.css";
+import dynamic from "next/dynamic";
+
+const CodeEditor = dynamic(
+  () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
+  { ssr: false },
+);
 interface QuestionProps {
+  technology: string;
   questionText: string;
   questionCode?: string;
-  options: { key: string; text: string }[];
+  anwerExplanation?: string;
+  answerA: string;
+  answerB: string;
+  answerC: string;
+  answerD: string;
   correctAnswer: string;
-  nextQuestion: () => void;
-  prevQuestion: () => void;
+  previewMode?: boolean;
 }
 
 const QuestionCard: React.FC<QuestionProps> = ({
+  technology,
   questionText,
   questionCode,
-  options,
+  anwerExplanation,
+  answerA,
+  answerB,
+  answerC,
+  answerD,
   correctAnswer,
-  nextQuestion,
-  prevQuestion,
+  previewMode,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   const [borderColor, setBorderColor] = useState<string>("");
-  const [code, setCode] = React.useState(
-    `function add(a, b) {\n  return a + b;\n}`,
-  );
 
   const handleAnswer = (key: string) => {
     setSelectedAnswer(key);
@@ -36,16 +48,41 @@ const QuestionCard: React.FC<QuestionProps> = ({
       setBorderColor("border-red-500");
     }
   };
+  const options = [
+    { key: "a", text: answerA },
+    { key: "b", text: answerB },
+    { key: "c", text: answerC },
+    { key: "d", text: answerD },
+  ];
 
   return (
     <div
       className={classNames(
-        "rounded-lg bg-white p-4 px-16 py-10 shadow",
+        "space-y-4 rounded-lg bg-white p-4 px-16 py-10 shadow",
         borderColor,
         "transition-colors duration-500",
       )}
     >
+      <Badge variant="outline">{technology.toUpperCase()}</Badge>
       <h2 className="mb-4 text-lg font-bold">{questionText}</h2>
+      {questionCode && (
+        <div className="space-y-2">
+          <CodeEditor
+            language="js"
+            value={questionCode}
+            placeholder="Kodu buraya giriniz."
+            disabled={true}
+            padding={15}
+            data-color-mode="dark"
+            style={{
+              fontSize: 12,
+              backgroundColor: "#f5f5f5",
+              fontFamily:
+                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+            }}
+          />
+        </div>
+      )}
       <div className="grid grid-cols-2 gap-6">
         {options.map((option, index) => (
           <button
@@ -68,26 +105,12 @@ const QuestionCard: React.FC<QuestionProps> = ({
         ))}
       </div>
 
-      <div className="mt-6 flex justify-between px-2">
-        <button
-          className="rounded bg-blue-500 px-4 py-2 text-white"
-          onClick={prevQuestion}
-        >
-          <div className="flex flex-row items-center justify-center gap-2">
-            <MdSkipPrevious size={25} color="white" /> Önceki
-          </div>
-        </button>
-
-        <button
-          className="rounded bg-blue-500 px-4 py-2 text-white"
-          onClick={nextQuestion}
-        >
-          <div className="flex flex-row items-center justify-center gap-2">
-            Sonra
-            <MdSkipNext size={25} color="white" />
-          </div>
-        </button>
-      </div>
+      {anwerExplanation && (
+        <div className="mt-4">
+          <h3 className="text-lg font-bold">Açıklama</h3>
+          <Textarea readOnly defaultValue={anwerExplanation} />
+        </div>
+      )}
     </div>
   );
 };

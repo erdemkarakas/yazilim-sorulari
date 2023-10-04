@@ -1,5 +1,5 @@
-import { technologyRouter } from "~/server/api/routers/technology";
-import { createTRPCRouter } from "~/server/api/trpc";
+import { technologyRouter } from "@/src/server/api/routers/technology";
+import { createTRPCRouter } from "@/src/server/api/trpc";
 import { questionsRouter } from "./routers/questions";
 
 /**

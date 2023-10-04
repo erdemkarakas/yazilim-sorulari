@@ -9,7 +9,7 @@ import { createTRPCNext } from "@trpc/next";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import superjson from "superjson";
 
-import { type AppRouter } from "~/server/api/root";
+import { type AppRouter } from "@/src/server/api/root";
 
 const getBaseUrl = () => {
   if (typeof window !== "undefined") return ""; // browser should use relative url
@@ -18,6 +18,7 @@ const getBaseUrl = () => {
 };
 
 /** A set of type-safe react-query hooks for your tRPC API. */
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 export const api = createTRPCNext<AppRouter>({
   config() {
     return {

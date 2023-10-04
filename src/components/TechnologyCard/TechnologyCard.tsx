@@ -27,7 +27,6 @@ const TechnologyCard: React.FC<TechnologyCardProps> = ({
         <h1 className=" text-center text-4xl font-bold text-slate-700">
           {technology.name.toUpperCase()}
         </h1>
-        <span className="mr-1  text-right text-slate-700">20 Soru</span>
       </div>
     </div>
   );

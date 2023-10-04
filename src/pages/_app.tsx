@@ -1,8 +1,8 @@
 import { type AppType } from "next/app";
 
-import { api } from "~/utils/api";
+import { api } from "@/src/lib/api";
 
-import "~/styles/globals.css";
+import "@/src/styles/globals.css";
 import Head from "next/head";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
@@ -18,4 +18,5 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
 export default api.withTRPC(MyApp);
