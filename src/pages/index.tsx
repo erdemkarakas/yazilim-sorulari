@@ -53,6 +53,9 @@ export default function Home() {
     limit: 20,
   });
 
+  const questionsData1 = questions?.filter(
+    (item: any, index: any) => index === 1,
+  );
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const nextQuestion = () => {
@@ -84,7 +87,9 @@ export default function Home() {
         )}
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Yazılım <span className="text-[hsl(212,100%,70%)]">Soruları</span>
+            <Link href={"/"}>
+              Yazılım <span className="text-[hsl(212,100%,70%)]">Soruları</span>
+            </Link>
           </h1>
           <p className="text-center text-2xl font-extrabold text-white">
             Hazırlanıyor...
@@ -181,7 +186,7 @@ export default function Home() {
           )}
           {sessionStep == 3 && (
             <div className="flex w-[900px] flex-col items-center">
-              {questions?.map((question, index) => (
+              {questionsData1?.map((question, index) => (
                 <QuestionCard
                   key={index}
                   technology={question.technologyId}
