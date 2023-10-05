@@ -48,7 +48,7 @@ export default function Home() {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [soundsOn, setSoundsOn] = useState(true);
   const { data: technologies } = api.technology.getAll.useQuery();
-  console.log(technologies);
+
   const { data: questions } = api.questions.getRandomQuestions.useQuery({
     technologyId: 1,
     limit: 20,
