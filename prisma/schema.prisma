@@ -12,9 +12,12 @@ generator client {
 }
 
 model Technology {
-    id        Int        @id @default(autoincrement())
-    name      String     @unique
-    questions Question[]
+    id           Int        @id @default(autoincrement())
+    name         String     @unique
+    alias        String     @unique
+    createdDate  DateTime   @default(now())
+    modifiedDate DateTime   @updatedAt
+    questions    Question[]
 }
 
 model Question {
@@ -27,8 +30,10 @@ model Question {
     answerD       String     @db.Text
     correctAnswer String     @db.Text
     answerExp     String     @db.Text
-    language      Technology @relation(fields: [technologyId], references: [id])
-    technologyId  Int
+    createdDate   DateTime   @default(now())
+    modifiedDate  DateTime   @updatedAt
+    technologyId  Int        @db.Int
+    technology    Technology @relation(fields: [technologyId], references: [id])
 
     @@index([technologyId])
 }

@@ -34,6 +34,7 @@ import { MdOutlinePreview } from "react-icons/md";
 import { api } from "@/src/lib/api";
 import { AiOutlineRollback, AiOutlineUpload } from "react-icons/ai";
 import Link from "next/link";
+import { Toaster } from "@/components/ui/toaster";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
@@ -50,9 +51,10 @@ export default function AddQuestion() {
     onSuccess: () => {
       setPreviewMode(false);
       toast({
-        title: "Soru başarıyla gönderildi.",
+        title: "✅ Soru başarıyla gönderildi.",
         description: "Sorunuz onaylandıktan sonra yayınlanacaktır.",
       });
+      form.reset();
     },
     onError: () => {
       setPreviewMode(false);
@@ -427,6 +429,7 @@ export default function AddQuestion() {
             </Form>
           </div>
         )}
+        <Toaster />
       </main>
     </>
   );
