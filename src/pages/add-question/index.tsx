@@ -116,7 +116,6 @@ export default function AddQuestion() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     setPreviewMode(true);
   }
   const isFormValid = form.formState.isValid;

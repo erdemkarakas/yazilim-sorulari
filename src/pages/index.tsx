@@ -1,16 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import Link from "next/link";
 import { Toaster } from "@/components/ui/toaster";
 import { api } from "@/src/lib/api";
 import TechnologyCard from "@/src/components/TechnologyCard/TechnologyCard";
-import QuestionCard from "@/src/components/QuestionCard/QuestionCard";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MdSkipNext, MdSkipPrevious } from "react-icons/md";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -24,39 +17,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ArrowLeft, ArrowUpFromLine, Play } from "lucide-react";
-
-const exampleData = [
-  {
-    id: 1,
-    technology: "javascript",
-    questionText: "Çıktısı Nedir?",
-    questionCode: `function sayHi() {
-      return console.log("Hello");
-    }`,
-    anwerExplanation: "Açıklama",
-    answerA: "Hello",
-    answerB: "undefined",
-    answerC: "ReferenceError",
-    answerD: "TypeError",
-    correctAnswer: "a",
-  },
-];
+import { useExamStore } from "../store";
+import { type ExamType } from "@/src/store/index";
+import { type Technology } from "@/src/store/index";
+import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
   const [sessionStep, setSessionStep] = useState(1);
-  const [selectedTechnology, setSelectedTechnology] = useState<any>(null);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [soundsOn, setSoundsOn] = useState(true);
+
+  const { examType, questionCount, soundEnabled, technology } = useExamStore();
+
   const { data: technologies } = api.technology.getAll.useQuery();
 
-  const { data: questions } = api.questions.getRandomQuestions.useQuery({
-    technologyId: 1,
-    limit: 20,
-  });
-
-  const questionsData1 = questions?.filter(
-    (item: any, index: any) => index === 1,
-  );
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const nextQuestion = () => {
@@ -65,6 +37,29 @@ export default function Home() {
 
   const prevQuestion = () => {
     setCurrentQuestionIndex((oldIndex) => oldIndex - 1);
+  };
+
+  const handleQuestionCountChange = (count: string) => {
+    useExamStore.setState({ questionCount: Number(count) });
+  };
+
+  const handleExamTypeChange = (value: ExamType) => {
+    useExamStore.setState({ examType: value });
+  };
+
+  const handleSound = (e: boolean) => {
+    useExamStore.setState({ soundEnabled: e });
+  };
+
+  const handleTechnologySelect = (selectedTechnology: Technology) => {
+    setSessionStep(2);
+    useExamStore.setState({
+      technology: {
+        technologyId: selectedTechnology.technologyId,
+        technologyAlias: selectedTechnology.technologyAlias,
+        technologyName: selectedTechnology.technologyName,
+      },
+    });
   };
 
   return (
@@ -87,33 +82,72 @@ export default function Home() {
             </Button>
           </div>
         )}
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+        <div className="flex min-h-screen flex-col items-center justify-center gap-12 px-10 py-16">
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             <Link href={"/"}>
               Yazılım <span className="text-[hsl(212,100%,70%)]">Soruları</span>
             </Link>
           </h1>
-          <p className="text-center text-2xl font-extrabold text-white">
-            Hazırlanıyor...
-          </p>
-
-          {sessionStep == 1 &&
-            technologies
-              ?.filter((item) => item.name === "Javascript")
-              .map((item) => (
-                <TechnologyCard
-                  onClick={() => setSessionStep(2)}
-                  key={item.id}
-                  technology={item}
-                />
-              ))}
-
+          <div className="flex h-full justify-center">
+            <div className="grid grid-cols-4 gap-6">
+              {sessionStep == 1 &&
+                technologies?.map(
+                  (item: { id: number; name: string; alias: string }) => (
+                    <TechnologyCard
+                      key={item.id}
+                      onClick={() =>
+                        handleTechnologySelect({
+                          technologyId: item.id,
+                          technologyAlias: item.alias,
+                          technologyName: item.name,
+                        })
+                      }
+                      technology={{
+                        technologyId: item.id,
+                        technologyAlias: item.alias,
+                        technologyName: item.name,
+                      }}
+                    />
+                  ),
+                )}
+            </div>
+          </div>
           {sessionStep == 2 && (
             <div className="flex flex-col space-y-6 rounded-lg bg-white p-12">
+              <Badge className="w-48 text-xl">Test Çözüm Modu</Badge>
+
               <RadioGroup
                 className="rounded-xl border-2 border-solid p-4"
                 defaultValue="informDuringSession"
+                value={examType}
+                onValueChange={(e) => {
+                  handleExamTypeChange(e as ExamType);
+                }}
               >
+                <Badge
+                  className={`w-fit ${
+                    technology.technologyAlias == "js"
+                      ? "bg-yellow-200"
+                      : technology.technologyAlias == "go"
+                      ? "bg-blue-400 "
+                      : technology.technologyAlias == "py"
+                      ? "bg-sky-400 "
+                      : technology.technologyAlias == "java"
+                      ? "bg-red-400 text-white"
+                      : technology.technologyAlias == "sql"
+                      ? "bg-blue-400 text-white"
+                      : technology.technologyAlias == "php"
+                      ? "bg-blue-400 text-white"
+                      : technology.technologyAlias == "cs"
+                      ? "bg-violet-400 text-white"
+                      : technology.technologyAlias == "c"
+                      ? "bg-blue-400 text-white"
+                      : ""
+                  }`}
+                  variant="outline"
+                >
+                  {technology.technologyName}
+                </Badge>
                 <div className="flex flex-col space-y-2">
                   <Label className="text-sm text-muted-foreground">
                     Test çözüm esnasında sorular işaretlendiği anda veya sonunda
@@ -142,7 +176,10 @@ export default function Home() {
                     {" "}
                     Soru sayısı
                   </Label>
-                  <Select defaultValue={"20"}>
+                  <Select
+                    onValueChange={handleQuestionCountChange}
+                    defaultValue={"20"}
+                  >
                     <SelectTrigger className="w-[180px]">
                       <SelectValue placeholder="Soru sayısı seç" />
                     </SelectTrigger>
@@ -159,12 +196,12 @@ export default function Home() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Switch
-                    onClick={() => setSoundsOn(!soundsOn)}
-                    defaultChecked={soundsOn}
+                    checked={soundEnabled}
+                    onCheckedChange={handleSound}
                     id="airplane-mode"
                   />
                   <Label htmlFor="airplane-mode">
-                    {soundsOn ? "Sesi Açık" : "Ses kapalı"}
+                    {soundEnabled ? "Sesi Açık" : "Ses kapalı"}
                   </Label>
                 </div>
               </div>
@@ -177,7 +214,9 @@ export default function Home() {
                   <ArrowLeft className="mr-2 h-4 w-4" /> Geri Dön
                 </Button>
                 <Button
-                  onClick={() => setSessionStep(3)}
+                  onClick={() => {
+                    setSessionStep(3);
+                  }}
                   className="text-xl"
                   size={"xl"}
                 >
@@ -186,7 +225,7 @@ export default function Home() {
               </div>
             </div>
           )}
-          {sessionStep == 3 && (
+          {/* {sessionStep == 3 && (
             <div className="flex w-[900px] flex-col items-center">
               {questionsData1?.map((question, index) => (
                 <QuestionCard
@@ -219,7 +258,7 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-          )}
+          )} */}
         </div>
         <Toaster />
       </main>
