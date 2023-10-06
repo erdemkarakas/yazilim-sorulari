@@ -21,6 +21,7 @@ import { useExamStore } from "../store";
 import { type ExamType } from "@/src/store/index";
 import { type Technology } from "@/src/store/index";
 import { Badge } from "@/components/ui/badge";
+import Tilt from "react-parallax-tilt";
 
 export default function Home() {
   const [sessionStep, setSessionStep] = useState(1);
@@ -83,21 +84,23 @@ export default function Home() {
               {sessionStep == 1 &&
                 technologies?.map(
                   (item: { id: number; name: string; alias: string }) => (
-                    <TechnologyCard
-                      key={item.id}
-                      onClick={() =>
-                        handleTechnologySelect({
+                    <Tilt key={item.id}>
+                      <TechnologyCard
+                        key={item.id}
+                        onClick={() =>
+                          handleTechnologySelect({
+                            technologyId: item.id,
+                            technologyAlias: item.alias,
+                            technologyName: item.name,
+                          })
+                        }
+                        technology={{
                           technologyId: item.id,
                           technologyAlias: item.alias,
                           technologyName: item.name,
-                        })
-                      }
-                      technology={{
-                        technologyId: item.id,
-                        technologyAlias: item.alias,
-                        technologyName: item.name,
-                      }}
-                    />
+                        }}
+                      />
+                    </Tilt>
                   ),
                 )}
             </div>

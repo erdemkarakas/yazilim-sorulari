@@ -49,7 +49,7 @@ const TechnologyCard: React.FC<TechnologyCardProps> = ({
 
   return (
     <div
-      className="flex min-w-full cursor-pointer flex-row items-center justify-around space-x-8 rounded-lg bg-white px-16 py-10 transition duration-500  hover:scale-125 md:mx-auto md:max-w-2xl"
+      className="flex min-w-full cursor-pointer flex-row items-center justify-around space-x-8 rounded-lg bg-white px-16 py-10 transition duration-500  hover:scale-110 md:mx-auto md:max-w-2xl"
       key={item.technologyId}
       onClick={onClick}
     >
