@@ -2,7 +2,6 @@ import QuestionCard from "@/src/components/QuestionCard/QuestionCard";
 import { useExamStore } from "@/src/store";
 import React from "react";
 import { api } from "@/src/lib/api";
-import { useRouter } from "next/router";
 
 export const Session = () => {
   const { examType, questionCount, soundEnabled } = useExamStore();

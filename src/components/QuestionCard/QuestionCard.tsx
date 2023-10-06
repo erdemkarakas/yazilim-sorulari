@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import "@uiw/react-textarea-code-editor/dist.css";
 import dynamic from "next/dynamic";
-import { Button } from "@/components/ui/button";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
@@ -34,7 +33,6 @@ const QuestionCard: React.FC<QuestionProps> = ({
   answerC,
   answerD,
   correctAnswer,
-  previewMode,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 

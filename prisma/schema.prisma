@@ -34,6 +34,7 @@ model Question {
     modifiedDate  DateTime   @updatedAt
     technologyId  Int        @db.Int
     technology    Technology @relation(fields: [technologyId], references: [id])
+    isValid       Boolean    @default(false)
 
     @@index([technologyId])
 }

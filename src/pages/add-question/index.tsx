@@ -29,7 +29,6 @@ import dynamic from "next/dynamic";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/use-toast";
 import QuestionCard from "@/src/components/QuestionCard/QuestionCard";
-import { Skeleton } from "@/components/ui/skeleton";
 import { MdOutlinePreview } from "react-icons/md";
 import { api } from "@/src/lib/api";
 import { AiOutlineRollback, AiOutlineUpload } from "react-icons/ai";
@@ -45,7 +44,6 @@ export default function AddQuestion() {
   const [questionHaveCode, setQuestionHaveCode] = useState(false);
   const [answerHaveExplanation, setAnswerHaveExplanation] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
-  const [isClient, setIsClient] = useState(false);
   const { toast } = useToast();
   const addQuestionMutation = api.questions.addQuestion.useMutation({
     onSuccess: () => {
@@ -115,7 +113,7 @@ export default function AddQuestion() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(_values: z.infer<typeof formSchema>) {
     setPreviewMode(true);
   }
   const isFormValid = form.formState.isValid;

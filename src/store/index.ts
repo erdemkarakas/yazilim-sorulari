@@ -15,7 +15,7 @@ interface ExamStore {
   technology: Technology;
 }
 
-export const useExamStore = create<ExamStore>((set) => ({
+export const useExamStore = create<ExamStore>(() => ({
   technology: {
     technologyId: 1,
     technologyAlias: "js",
