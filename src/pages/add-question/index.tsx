@@ -64,10 +64,6 @@ export default function AddQuestion() {
     },
   });
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   const formSchema = z.object({
     technology: z.string().min(1, {
       message: "Teknoloji seçilmelidir.",
