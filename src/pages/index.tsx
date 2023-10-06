@@ -25,19 +25,9 @@ import { Badge } from "@/components/ui/badge";
 export default function Home() {
   const [sessionStep, setSessionStep] = useState(1);
 
-  const { examType, questionCount, soundEnabled, technology } = useExamStore();
+  const { examType, soundEnabled, technology } = useExamStore();
 
   const { data: technologies } = api.technology.getAll.useQuery();
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
-  const nextQuestion = () => {
-    setCurrentQuestionIndex((oldIndex) => oldIndex + 1);
-  };
-
-  const prevQuestion = () => {
-    setCurrentQuestionIndex((oldIndex) => oldIndex - 1);
-  };
 
   const handleQuestionCountChange = (count: string) => {
     useExamStore.setState({ questionCount: Number(count) });

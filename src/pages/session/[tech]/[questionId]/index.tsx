@@ -4,7 +4,7 @@ import React from "react";
 import { api } from "@/src/lib/api";
 
 export const Session = () => {
-  const { examType, questionCount, soundEnabled } = useExamStore();
+  const { questionCount } = useExamStore();
 
   const { data: questions } = api.questions.getRandomQuestions.useQuery({
     technologyId: 1,
