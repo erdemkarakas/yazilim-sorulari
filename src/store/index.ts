@@ -9,23 +9,20 @@ export interface Technology {
 }
 interface ExamStore {
   examType: ExamType;
-  questionCount: number;
+  selectedQuestionCount: number;
   soundEnabled: boolean;
   randomQuestionIds: number[];
-  technology: Technology;
+  selectedTechnology: Technology;
 }
 
 export const useExamStore = create<ExamStore>(() => ({
-  technology: {
+  selectedTechnology: {
     technologyId: 1,
     technologyAlias: "js",
     technologyName: "JavaScript",
   },
-  questionCount: 20,
+  selectedQuestionCount: 20,
   examType: "informDuringSession",
   randomQuestionIds: [],
   soundEnabled: true,
-  // setNumQuestions: (numQuestions) => set({ questionCount: numQuestions }),
-  // setExamType: (examType) => set({ examType }),
-  // setRandomQuestionIds: (randomQuestionIds) => set({ randomQuestionIds }),
 }));

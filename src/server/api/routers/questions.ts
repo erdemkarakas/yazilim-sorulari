@@ -89,4 +89,18 @@ export const questionsRouter = createTRPCRouter({
 
       return totalQuestionsCount;
     }),
+
+  getQuestionById: publicProcedure
+    .input(z.object({ id: z.number(), technologyId: z.number() }))
+    .query(async ({ ctx, input: { id, technologyId } }) => {
+      if (!technologyId) {
+        throw new Error("technologyId is required");
+      }
+
+      const question = await ctx.db.question.findFirst({
+        where: { id, technologyId },
+      });
+
+      return question;
+    }),
 });
