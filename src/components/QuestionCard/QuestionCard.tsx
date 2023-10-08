@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import "@uiw/react-textarea-code-editor/dist.css";
 import dynamic from "next/dynamic";
+import { useExamStore } from "@/src/store";
+import { motion } from "framer-motion";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
@@ -33,9 +35,10 @@ const QuestionCard: React.FC<QuestionProps> = ({
   answerC,
   answerD,
   correctAnswer,
+  previewMode = false,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-
+  const { selectedTechnology } = useExamStore();
   const [borderColor, setBorderColor] = useState<string>("");
 
   const handleAnswer = (key: string) => {
@@ -57,12 +60,35 @@ const QuestionCard: React.FC<QuestionProps> = ({
   return (
     <div
       className={classNames(
-        "mt-4 h-[80%] w-[80%] space-y-4 overflow-y-auto rounded-lg bg-white p-4 px-16 py-10 shadow-2xl",
+        "mt-4 h-[80%] w-[100%] space-y-4 overflow-y-auto rounded-lg bg-white p-4 px-16 py-10 shadow-2xl",
         borderColor,
         "transition-colors duration-500",
       )}
     >
-      <Badge variant="outline">{technology == 1 ? "Javascript" : ""}</Badge>
+      <Badge
+        className={`w-fit ${
+          selectedTechnology.technologyAlias == "js"
+            ? "bg-yellow-200"
+            : selectedTechnology.technologyAlias == "go"
+            ? "bg-blue-400 "
+            : selectedTechnology.technologyAlias == "py"
+            ? "bg-sky-400 "
+            : selectedTechnology.technologyAlias == "java"
+            ? "bg-red-400 text-white"
+            : selectedTechnology.technologyAlias == "sql"
+            ? "bg-blue-400 text-white"
+            : selectedTechnology.technologyAlias == "php"
+            ? "bg-blue-400 text-white"
+            : selectedTechnology.technologyAlias == "cs"
+            ? "bg-violet-400 text-white"
+            : selectedTechnology.technologyAlias == "c"
+            ? "bg-blue-400 text-white"
+            : ""
+        }`}
+        variant="outline"
+      >
+        {selectedTechnology.technologyName}
+      </Badge>
       <h2 className="mb-4 text-lg font-bold">{questionText}</h2>
       {questionCode && (
         <div className="space-y-2">
@@ -82,9 +108,9 @@ const QuestionCard: React.FC<QuestionProps> = ({
           />
         </div>
       )}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-2">
         {options.map((option, index) => (
-          <button
+          <motion.button
             key={index}
             className={`w-full py-2 text-left ${
               selectedAnswer === option.key && selectedAnswer === correctAnswer
@@ -95,16 +121,25 @@ const QuestionCard: React.FC<QuestionProps> = ({
                 : "rounded-lg border-2 border-solid border-opacity-25 p-4 hover:bg-slate-100"
             }`}
             onClick={() => handleAnswer(option.key)}
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            animate={
+              selectedAnswer === option.key && selectedAnswer !== correctAnswer
+                ? { x: [-10, 10, -10, 10, 0] }
+                : { x: 0 }
+            }
+            transition={{ duration: 0.5 }}
           >
-            <span className="mr-2 border-r-2 border-solid border-black border-opacity-25 pr-3 text-lg uppercase">
+            <span className="mr-2 h-8 border-r-2 border-solid border-black border-opacity-25 pr-3 text-lg uppercase">
               {option.key}
-            </span>{" "}
+            </span>
             {option.text}
-          </button>
+          </motion.button>
         ))}
       </div>
 
-      {anwerExplanation && true && (
+      {anwerExplanation && previewMode && (
         <div className="mt-4">
           <h3 className="text-lg font-bold">Açıklama</h3>
           <Textarea readOnly defaultValue={anwerExplanation} />

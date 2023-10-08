@@ -194,6 +194,10 @@ export default function AddQuestion() {
                             <SelectItem value="2">Python</SelectItem>
                             <SelectItem value="3">Java</SelectItem>
                             <SelectItem value="4">SQL</SelectItem>
+                            <SelectItem value="5">Go</SelectItem>
+                            <SelectItem value="6">Php</SelectItem>
+                            <SelectItem value="7">C#</SelectItem>
+                            <SelectItem value="8">C++</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />

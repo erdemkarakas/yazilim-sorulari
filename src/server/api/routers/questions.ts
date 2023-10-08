@@ -70,6 +70,7 @@ export const questionsRouter = createTRPCRouter({
             correctAnswer: correctAnswer,
             questionCode: questionCode || "",
             answerExp: answerExp || "",
+            isValid: false,
           },
         });
 
@@ -98,7 +99,7 @@ export const questionsRouter = createTRPCRouter({
       }
 
       const question = await ctx.db.question.findFirst({
-        where: { id, technologyId },
+        where: { id, technologyId, isValid: true },
       });
 
       return question;
