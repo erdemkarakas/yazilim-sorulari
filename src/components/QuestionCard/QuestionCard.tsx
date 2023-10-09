@@ -104,48 +104,33 @@ const QuestionCard: React.FC<QuestionProps> = ({
 
       <div className="grid grid-cols-1 gap-2">
         {options.map((option, index) => (
-          <div
-            onClick={() => handleAnswer(option.key)}
+          <motion.button
             key={index}
-            className="flex flex-row gap-x-[2px]"
+            className={`flex h-14 w-full items-center gap-2 border-2 border-solid border-blue-950 border-opacity-[60%] text-left text-lg ${
+              selectedAnswer === option.key && selectedAnswer === correctAnswer
+                ? "rounded-xl border-2 border-solid  bg-emerald-500 text-white hover:bg-emerald-400 "
+                : selectedAnswer === option.key &&
+                  selectedAnswer !== correctAnswer
+                ? "rounded-xl border-2 border-solid bg-red-600 text-white hover:bg-red-500 "
+                : "rounded-xl border-2 border-solid hover:bg-slate-100"
+            }`}
+            onClick={() => handleAnswer(option.key)}
+            initial={{ scale: 1 }}
+            whileTap={{ scale: 0.9 }}
+            animate={
+              selectedAnswer === option.key && selectedAnswer !== correctAnswer
+                ? { x: [-10, 10, -10, 10, 0] }
+                : { x: 0 }
+            }
+            transition={{ duration: 0.5 }}
           >
             <div
-              className={`flex h-full items-center rounded-xl border-2 border-solid   px-4 pr-4 text-xl uppercase  ${
-                selectedAnswer === option.key &&
-                selectedAnswer === correctAnswer
-                  ? "rounded-xl border-2 border-solid border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
-                  : selectedAnswer === option.key &&
-                    selectedAnswer !== correctAnswer
-                  ? "rounded-xl border-2 border-solid border-red-500  bg-red-400 font-semibold  text-white  hover:bg-red-200 "
-                  : "rounded-xl border-2 border-solid hover:bg-slate-100"
-              }`}
+              className={`flex h-full items-center rounded-xl border-r-2 border-solid border-blue-950 border-opacity-[60%]  px-4 pr-4 text-xl uppercase `}
             >
               {option.key}
             </div>
-            <motion.button
-              className={`flex h-14 w-full items-center gap-2  pl-2 text-left text-lg ${
-                selectedAnswer === option.key &&
-                selectedAnswer === correctAnswer
-                  ? "rounded-xl border-2 border-solid  border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
-                  : selectedAnswer === option.key &&
-                    selectedAnswer !== correctAnswer
-                  ? "rounded-xl border-2 border-solid border-red-500 bg-red-400 font-semibold text-white  hover:bg-red-200 "
-                  : "rounded-xl border-2 border-solid hover:bg-slate-100"
-              }`}
-              initial={{ scale: 1 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              animate={
-                selectedAnswer === option.key &&
-                selectedAnswer !== correctAnswer
-                  ? { x: [-10, 10, -10, 10, 0] }
-                  : { x: 0 }
-              }
-              transition={{ duration: 0.5 }}
-            >
-              <div>{option.text}</div>
-            </motion.button>
-          </div>
+            <div>{option.text}</div>
+          </motion.button>
         ))}
       </div>
 
