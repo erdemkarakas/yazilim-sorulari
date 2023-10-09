@@ -39,16 +39,9 @@ const QuestionCard: React.FC<QuestionProps> = ({
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const { selectedTechnology } = useExamStore();
-  const [borderColor, setBorderColor] = useState<string>("");
 
   const handleAnswer = (key: string) => {
     setSelectedAnswer(key);
-
-    if (key === correctAnswer) {
-      setBorderColor("border-green-500");
-    } else {
-      setBorderColor("border-red-500");
-    }
   };
   const options = [
     { key: "a", text: answerA },
@@ -61,7 +54,7 @@ const QuestionCard: React.FC<QuestionProps> = ({
     <div
       className={classNames(
         "mt-4 h-[80%] w-[100%] space-y-4 overflow-y-auto rounded-lg bg-white p-4 px-16 py-10 shadow-2xl",
-        borderColor,
+
         "transition-colors duration-500",
       )}
     >
@@ -108,34 +101,51 @@ const QuestionCard: React.FC<QuestionProps> = ({
           />
         </div>
       )}
+
       <div className="grid grid-cols-1 gap-2">
         {options.map((option, index) => (
-          <motion.button
-            key={index}
-            className={`w-full py-2 text-left ${
-              selectedAnswer === option.key && selectedAnswer === correctAnswer
-                ? "rounded-lg border-2 border-solid border-green-600 border-opacity-50  p-4 hover:bg-slate-100 "
-                : selectedAnswer === option.key &&
-                  selectedAnswer !== correctAnswer
-                ? "rounded-lg border-2 border-solid border-red-600 border-opacity-50  p-4 hover:bg-slate-100 "
-                : "rounded-lg border-2 border-solid border-opacity-25 p-4 hover:bg-slate-100"
-            }`}
+          <div
             onClick={() => handleAnswer(option.key)}
-            initial={{ scale: 1 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            animate={
-              selectedAnswer === option.key && selectedAnswer !== correctAnswer
-                ? { x: [-10, 10, -10, 10, 0] }
-                : { x: 0 }
-            }
-            transition={{ duration: 0.5 }}
+            key={index}
+            className="flex flex-row gap-x-[2px]"
           >
-            <span className="mr-2 h-8 border-r-2 border-solid border-black border-opacity-25 pr-3 text-lg uppercase">
+            <div
+              className={`flex h-full items-center rounded-xl border-2 border-solid   px-4 pr-4 text-xl uppercase  ${
+                selectedAnswer === option.key &&
+                selectedAnswer === correctAnswer
+                  ? "rounded-xl border-2 border-solid border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
+                  : selectedAnswer === option.key &&
+                    selectedAnswer !== correctAnswer
+                  ? "rounded-xl border-2 border-solid border-red-500  bg-red-400 font-semibold  text-white  hover:bg-red-200 "
+                  : "rounded-xl border-2 border-solid hover:bg-slate-100"
+              }`}
+            >
               {option.key}
-            </span>
-            {option.text}
-          </motion.button>
+            </div>
+            <motion.button
+              className={`flex h-14 w-full items-center gap-2  pl-2 text-left text-lg ${
+                selectedAnswer === option.key &&
+                selectedAnswer === correctAnswer
+                  ? "rounded-xl border-2 border-solid  border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
+                  : selectedAnswer === option.key &&
+                    selectedAnswer !== correctAnswer
+                  ? "rounded-xl border-2 border-solid border-red-500 bg-red-400 font-semibold text-white  hover:bg-red-200 "
+                  : "rounded-xl border-2 border-solid hover:bg-slate-100"
+              }`}
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              animate={
+                selectedAnswer === option.key &&
+                selectedAnswer !== correctAnswer
+                  ? { x: [-10, 10, -10, 10, 0] }
+                  : { x: 0 }
+              }
+              transition={{ duration: 0.5 }}
+            >
+              <div>{option.text}</div>
+            </motion.button>
+          </div>
         ))}
       </div>
 
