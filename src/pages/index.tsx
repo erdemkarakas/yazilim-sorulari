@@ -42,32 +42,34 @@ export default function Home() {
     <>
       <main className="flex min-h-screen min-w-full flex-col items-center justify-center ">
         <div className="flex min-h-screen flex-col items-center justify-center gap-12 px-10 py-16">
-          <motion.div className="text flex flex-row items-center justify-center gap-1">
-            {title1.split("").map((letter, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.2, delay: index * 0.1 }}
-                className="text-center text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] sm:text-[5rem]"
-              >
-                {letter}
-              </motion.span>
-            ))}
-            <div className="rounded-lg bg-white bg-opacity-75 px-4 py-1">
-              {title2.split("").map((letter, index) => (
+          {!isLoadingTech && (
+            <motion.div className="text flex flex-row items-center justify-center gap-1">
+              {title1.split("").map((letter, index) => (
                 <motion.span
                   key={index}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2, delay: index * 0.1 + 0.8 }}
-                  className="text-center text-5xl font-extrabold tracking-tight text-[#021e6d] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] sm:text-[5rem]"
+                  transition={{ duration: 0.2, delay: index * 0.1 }}
+                  className="text-center text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] sm:text-[5rem]"
                 >
                   {letter}
                 </motion.span>
               ))}
-            </div>
-          </motion.div>
+              <div className="rounded-lg bg-white bg-opacity-75 px-4 py-1">
+                {title2.split("").map((letter, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2, delay: index * 0.1 + 0.8 }}
+                    className="text-center text-5xl font-extrabold tracking-tight text-[#021e6d] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] sm:text-[5rem]"
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          )}
           {/* <h1 className="text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             <Link href={"/"}>
               Yazılım <span className="text-[hsl(212,100%,70%)]">Soruları</span>
