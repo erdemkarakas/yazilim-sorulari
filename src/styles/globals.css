@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/*  /images/background.png make background for all project */
 @layer base {
   body {
-    background-image: url("../images/background.png");
+    background-image: url("../images/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
