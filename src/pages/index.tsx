@@ -13,6 +13,8 @@ import { useExamStore } from "../store";
 import { type Technology } from "@/src/store/index";
 import Tilt from "react-parallax-tilt";
 import { Skeleton } from "@/components/ui/skeleton";
+import Image from "next/image";
+import logo from "@/src/images/logo.png";
 
 export default function Home() {
   const router = useRouter();
@@ -40,9 +42,10 @@ export default function Home() {
   const title2 = "Soruları";
   return (
     <>
-      <main className="flex min-h-screen min-w-full flex-col items-center justify-center ">
+      <main className="flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
         <div className="flex min-h-screen flex-col items-center justify-center gap-12 px-10 py-16">
-          {!isLoadingTech && (
+          <Image src={logo} alt={"logo"} />
+          {/* {!isLoadingTech && (
             <motion.div className="text flex flex-row items-center justify-center gap-1">
               {title1.split("").map((letter, index) => (
                 <motion.span
@@ -69,7 +72,7 @@ export default function Home() {
                 ))}
               </div>
             </motion.div>
-          )}
+          )} */}
           {/* <h1 className="text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             <Link href={"/"}>
               Yazılım <span className="text-[hsl(212,100%,70%)]">Soruları</span>
