@@ -14,6 +14,7 @@ import { type Technology } from "@/src/store/index";
 import Tilt from "react-parallax-tilt";
 import Image from "next/image";
 import logo from "@/src/images/logo.png";
+import backgroundWawe from "@/src/images/background_wawe.png";
 
 export default function Home() {
   const router = useRouter();
@@ -41,7 +42,18 @@ export default function Home() {
   const title2 = "Soruları";
   return (
     <>
-      <main className="flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        style={{
+          backgroundImage: `url(${backgroundWawe.src})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+        className="relative flex min-h-screen min-w-full bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 pb-10 lg:pt-16 "
+      >
         <div className="flex  h-full flex-col items-center justify-center space-y-4 px-10">
           <motion.div
             initial={{ opacity: 0 }}
@@ -138,23 +150,26 @@ export default function Home() {
           )}
         </div>
         <Toaster />
-        <div className="absolute bottom-0 flex flex-col items-center justify-center gap-2">
-          {" "}
-          <span className="font-mono text-sm font-medium text-white">
-            Erdem Karakaş @2023 {/* link to erdemkarkas.dev */}
-            <Link
-              href="https://erdemkarakas.dev"
-              className="text-blue-200 hover:underline"
-              target="_blank"
-            >
-              erdemkarakas.dev
-            </Link>
-          </span>
-          <span className="font-mono text-xs text-white">
-            Built with t3-stack, Next.js, TailwindCSS, and PlanetScale.
-          </span>
-        </div>
-      </main>
+        <footer className="absolute bottom-0 w-full">
+          <div className="container mx-auto bg-transparent px-4">
+            <div className="flex flex-col items-center justify-center">
+              <span className="font-sans text-sm font-medium text-white">
+                Erdem Karakaş @2023 {/* link to erdemkarkas.dev */}
+                <Link
+                  href="https://erdemkarakas.dev"
+                  className="text-blue-200 hover:underline"
+                  target="_blank"
+                >
+                  erdemkarakas.dev
+                </Link>
+              </span>
+              <span className="font-sans text-xs text-white">
+                Built with t3-stack, Next.js, TailwindCSS, and PlanetScale.
+              </span>
+            </div>
+          </div>
+        </footer>
+      </motion.main>
     </>
   );
 }
