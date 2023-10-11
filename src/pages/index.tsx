@@ -12,7 +12,6 @@ import { ArrowUpFromLine } from "lucide-react";
 import { useExamStore } from "../store";
 import { type Technology } from "@/src/store/index";
 import Tilt from "react-parallax-tilt";
-import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import logo from "@/src/images/logo.png";
 
@@ -43,7 +42,7 @@ export default function Home() {
   return (
     <>
       <main className="flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
-        <div className="flex min-h-screen flex-col items-center justify-center space-y-4 px-10">
+        <div className="flex  h-full flex-col items-center justify-center space-y-4 px-10">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -139,7 +138,7 @@ export default function Home() {
           )}
         </div>
         <Toaster />
-        <div className="flex flex-col items-center justify-center gap-2">
+        <div className="absolute bottom-0 flex flex-col items-center justify-center gap-2">
           {" "}
           <span className="font-mono text-sm font-medium text-white">
             Erdem Karakaş @2023 {/* link to erdemkarkas.dev */}
