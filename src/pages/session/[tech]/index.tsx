@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { api } from "@/src/lib/api";
-import { ExamType, useExamStore } from "@/src/store";
+import { type ExamType, useExamStore } from "@/src/store";
 import {
   ArrowLeft,
   ArrowUpFromLine,
@@ -24,7 +24,8 @@ import {
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import Image from "next/image";
+import logo from "@/src/images/logo.png";
 export default function TechSessionPage() {
   const router = useRouter();
   const { examType, soundEnabled, selectedTechnology, selectedQuestionCount } =
@@ -63,11 +64,13 @@ export default function TechSessionPage() {
   };
 
   return (
-    <main className="flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-b from-[#021e6d] to-[#15162c]">
-      <div className="flex min-h-screen flex-col items-center justify-center gap-12 px-10 py-16">
+    <main className="flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-2 px-10 py-16">
         <h1 className="text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
           <Link href={"/"}>
-            Yazılım <span className="text-[hsl(212,100%,70%)]">Soruları</span>
+            <div className="">
+              <Image src={logo} alt={"logo"} />
+            </div>
           </Link>
         </h1>
 

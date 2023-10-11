@@ -43,8 +43,10 @@ export default function Home() {
   return (
     <>
       <main className="flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
-        <div className="flex min-h-screen flex-col items-center justify-center gap-12 px-10 py-16">
-          <Image src={logo} alt={"logo"} />
+        <div className="flex min-h-screen flex-col items-center justify-center space-y-4 px-10">
+          <div className="md:pb-12">
+            <Image src={logo} alt={"logo"} />
+          </div>
           {/* {!isLoadingTech && (
             <motion.div className="text flex flex-row items-center justify-center gap-1">
               {title1.split("").map((letter, index) => (
@@ -129,6 +131,22 @@ export default function Home() {
           )}
         </div>
         <Toaster />
+        <div className="flex flex-col items-center justify-center gap-2">
+          {" "}
+          <span className="font-mono text-sm font-medium text-white">
+            Erdem Karakaş @2023 {/* link to erdemkarkas.dev */}
+            <Link
+              href="https://erdemkarakas.dev"
+              className="text-blue-200 hover:underline"
+              target="_blank"
+            >
+              erdemkarakas.dev
+            </Link>
+          </span>
+          <span className="font-mono text-xs text-white">
+            Built with t3-stack, Next.js, TailwindCSS, and PlanetScale.
+          </span>
+        </div>
       </main>
     </>
   );
