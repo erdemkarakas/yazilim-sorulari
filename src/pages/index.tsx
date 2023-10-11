@@ -103,10 +103,11 @@ export default function Home() {
               </Link>
             </Button>
           </div>
-
           {isLoadingTech ? (
             <div className="flex h-full justify-center">
-              <Skeleton className="h-96 w-full" />
+              <div className="absolute bottom-1/2 right-1/2  translate-x-1/2 translate-y-1/2 transform ">
+                <div className="border-white-400 h-64 w-64  animate-spin rounded-full border-8 border-solid border-t-transparent"></div>
+              </div>
             </div>
           ) : (
             <div className="flex h-full justify-center">
