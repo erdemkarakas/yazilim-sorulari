@@ -87,9 +87,9 @@ export default function Home() {
             </Link>
           </h1> */}
 
-          <div className="flex lg:absolute lg:right-20 lg:top-20">
+          <div className="flex lg:absolute lg:right-16 lg:top-14">
             <Button
-              className="transition duration-500 hover:scale-125"
+              className="rounded-3xl transition duration-500 hover:scale-125"
               variant={"outline"}
               size={"xl"}
             >
@@ -97,15 +97,15 @@ export default function Home() {
                 className="flex flex-row items-center justify-center text-base"
                 href={"/add-question"}
               >
-                <ArrowUpFromLine className="mr-2 h-4 w-4" />
+                <ArrowUpFromLine className="mr-2 h-6 w-6" />
                 Soru Yükle
               </Link>
             </Button>
           </div>
           {isLoadingTech ? (
             <div className="flex h-full justify-center">
-              <div className="absolute bottom-1/2 right-1/2  translate-x-1/2 translate-y-1/2 transform ">
-                <div className="border-white-400 h-64 w-64  animate-spin rounded-full border-8 border-solid border-t-transparent"></div>
+              <div className="absolute bottom-1/3 right-1/2  translate-x-1/2 translate-y-1/2 transform ">
+                <div className="border-white-400 h-40 w-40  animate-spin rounded-full border-8 border-solid border-t-transparent"></div>
               </div>
             </div>
           ) : (
