@@ -44,9 +44,16 @@ export default function Home() {
     <>
       <main className="flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
         <div className="flex min-h-screen flex-col items-center justify-center space-y-4 px-10">
-          <div className="md:pb-12">
-            <Image src={logo} alt={"logo"} />
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <div className="md:pb-12">
+              <Image src={logo} alt={"logo"} />
+            </div>
+          </motion.div>
+
           {/* {!isLoadingTech && (
             <motion.div className="text flex flex-row items-center justify-center gap-1">
               {title1.split("").map((letter, index) => (
