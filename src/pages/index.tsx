@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { Button } from "@/components/ui/button";
 import TechnologyCard from "@/src/components/TechnologyCard/TechnologyCard";
 
-import { ArrowUpFromLine } from "lucide-react";
+import { UploadCloud } from "lucide-react";
 import { useExamStore } from "../store";
 import { type Technology } from "@/src/store/index";
 import Tilt from "react-parallax-tilt";
@@ -63,19 +63,19 @@ export default function Home() {
           </motion.div>
 
           <div className="flex lg:absolute lg:right-16 lg:top-14">
-            <Button
-              className="rounded-3xl transition duration-500 hover:scale-125"
-              variant={"outline"}
-              size={"xl"}
+            <Link
+              className="flex flex-row items-center justify-center text-base"
+              href={"/add-question"}
             >
-              <Link
-                className="flex flex-row items-center justify-center text-base"
-                href={"/add-question"}
+              <Button
+                className="rounded-3xl transition duration-500 hover:scale-125"
+                variant={"outline"}
+                size={"xl"}
               >
-                <ArrowUpFromLine className="mr-2 h-6 w-6" />
+                <UploadCloud className="mr-2 h-6 w-6" />
                 Soru Yükle
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
 
           {isLoadingTech ? (

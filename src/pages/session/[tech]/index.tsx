@@ -18,12 +18,12 @@ import { type ExamType, useExamStore } from "@/src/store";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
-  ArrowUpFromLine,
   Play,
   Volume2,
   VolumeX,
   TimerOff,
   Timer,
+  UploadCloud,
 } from "lucide-react";
 import React from "react";
 import Link from "next/link";
@@ -31,7 +31,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from "@/src/images/yazilimSorularoLogo.svg";
 import backSvg from "@/src/images/background_wawe.svg";
-import { Checkbox } from "@/components/ui/checkbox";
 
 export default function TechSessionPage() {
   const router = useRouter();
@@ -97,19 +96,19 @@ export default function TechSessionPage() {
           </motion.div>
 
           <div className="absolute right-2 top-6 lg:absolute lg:right-16 lg:top-14">
-            <Button
-              className="h-10 rounded-3xl transition duration-500 hover:scale-125 md:h-14"
-              variant={"outline"}
-              size={"xl"}
+            <Link
+              className="flex flex-row items-center justify-center text-base"
+              href={"/add-question"}
             >
-              <Link
-                className="flex flex-row items-center justify-center text-base"
-                href={"/add-question"}
+              <Button
+                className="rounded-3xl transition duration-500 hover:scale-125"
+                variant={"outline"}
+                size={"xl"}
               >
-                <ArrowUpFromLine className="mr-2 h-6 w-6" />
+                <UploadCloud className="mr-2 h-6 w-6" />
                 Soru Yükle
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
         </div>
         {
