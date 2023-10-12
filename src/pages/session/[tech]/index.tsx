@@ -124,7 +124,7 @@ export default function TechSessionPage() {
               }}
             >
               <Badge
-                className={`mb-2 w-fit md:mb-4 ${
+                className={`mb-2 w-fit  ${
                   selectedTechnology.technologyAlias == "js"
                     ? "bg-yellow-200"
                     : selectedTechnology.technologyAlias == "go"
