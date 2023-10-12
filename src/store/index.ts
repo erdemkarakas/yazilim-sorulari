@@ -11,6 +11,7 @@ interface ExamStore {
   examType: ExamType;
   selectedQuestionCount: number;
   soundEnabled: boolean;
+  timerEnabled: boolean;
   randomQuestionIds: number[];
   selectedTechnology: Technology;
 }
@@ -25,4 +26,5 @@ export const useExamStore = create<ExamStore>(() => ({
   examType: "informDuringSession",
   randomQuestionIds: [],
   soundEnabled: true,
+  timerEnabled: false,
 }));

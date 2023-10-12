@@ -7,6 +7,10 @@ import "@uiw/react-textarea-code-editor/dist.css";
 import dynamic from "next/dynamic";
 import { useExamStore } from "@/src/store";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+
+import { ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
@@ -53,13 +57,13 @@ const QuestionCard: React.FC<QuestionProps> = ({
   return (
     <div
       className={classNames(
-        "mt-4 h-[80%] w-[100%] space-y-4 overflow-y-auto rounded-lg bg-white p-4 px-16 py-10 shadow-2xl",
+        "mb:mt-4 h-[80%] w-[100%] space-y-4 overflow-y-auto rounded-xl bg-white pt-10 shadow-2xl",
 
         "transition-colors duration-500",
       )}
     >
       <Badge
-        className={`w-fit ${
+        className={`ml-5 w-fit ${
           selectedTechnology.technologyAlias == "js"
             ? "bg-yellow-200"
             : selectedTechnology.technologyAlias == "go"
@@ -82,9 +86,9 @@ const QuestionCard: React.FC<QuestionProps> = ({
       >
         {selectedTechnology.technologyName}
       </Badge>
-      <h2 className="mb-4 text-lg font-bold">{questionText}</h2>
+      <h2 className="mb-4 ml-5 text-lg font-bold">{questionText}</h2>
       {questionCode && (
-        <div className="space-y-2">
+        <div className="space-y-2 px-5">
           <CodeEditor
             language="js"
             value={questionCode}
@@ -102,7 +106,7 @@ const QuestionCard: React.FC<QuestionProps> = ({
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-2">
+      <div className="px- grid grid-cols-1 gap-2 px-4">
         {options.map((option, index) => (
           <div
             onClick={() => handleAnswer(option.key)}
@@ -155,6 +159,22 @@ const QuestionCard: React.FC<QuestionProps> = ({
           <Textarea readOnly defaultValue={anwerExplanation} />
         </div>
       )}
+      <div className="grid w-full grid-cols-2 divide-x-2">
+        <div>
+          <Button className="h-14 w-full gap-x-4 rounded-none bg-gradient-to-r from-cyan-700 to-blue-700 hover:from-cyan-600 hover:to-blue-600">
+            {" "}
+            <ArrowLeft />
+            GERİ
+          </Button>
+        </div>
+        <div>
+          <Button className="h-14 w-full gap-x-4 rounded-none  bg-gradient-to-l from-cyan-700 to-blue-700  hover:from-cyan-600 hover:to-blue-600">
+            {" "}
+            İLER
+            <ArrowRight />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

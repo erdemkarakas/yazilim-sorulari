@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { useRouter } from "next/router";
 import { api } from "@/src/lib/api";
 import { useExamStore } from "@/src/store";
 import QuestionCard from "@/src/components/QuestionCard/QuestionCard";
-import { MdSkipNext } from "react-icons/md";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import logo from "@/src/images/yazilimSorularoLogo.svg";
+import backSvg from "@/src/images/background_wawe.svg";
+
 const QuestionPage = () => {
   const router = useRouter();
   const { questionId } = router.query;
@@ -36,42 +41,39 @@ const QuestionPage = () => {
   };
 
   return (
-    <main className="flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-b from-[#021e6d] to-[#15162c]">
-      <div className="flex w-[900px] flex-col items-center">
-        {question && (
-          <QuestionCard
-            key={question.id}
-            technology={question.technologyId}
-            questionText={question.questionText}
-            questionCode={question.questionCode}
-            anwerExplanation={question.answerExp}
-            answerA={question.answerA}
-            answerB={question.answerB}
-            answerC={question.answerC}
-            answerD={question.answerD}
-            correctAnswer={question.correctAnswer}
-            previewMode={false}
-          />
-        )}
-
-        <div className="mt-2 flex items-center justify-evenly space-x-28">
-          {/* <Button variant={"outline"} onClick={prevQuestion}>
-                  <div className="flex flex-row items-center justify-center gap-2">
-                    <MdSkipPrevious size={25} /> Önceki
-                  </div>
-                </Button> */}
-
-          <Button variant={"outline"} onClick={nextQuestion}>
-            <div className="flex flex-row items-center justify-center gap-2">
-              Sonra
-              <MdSkipNext size={25} />
+    <>
+      <motion.main className="absolute flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
+        <div className="flex">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="z-auto"
+          >
+            <div className="">
+              <Image src={logo} alt={"logo"} width={400} height={180} />
             </div>
-          </Button>
+          </motion.div>
         </div>
-      </div>
-
-      <Button>Sonraki</Button>
-    </main>
+        <div className="flex flex-col items-center px-4 py-6 md:w-[900px]">
+          {question && (
+            <QuestionCard
+              key={question.id}
+              technology={question.technologyId}
+              questionText={question.questionText}
+              questionCode={question.questionCode}
+              anwerExplanation={question.answerExp}
+              answerA={question.answerA}
+              answerB={question.answerB}
+              answerC={question.answerC}
+              answerD={question.answerD}
+              correctAnswer={question.correctAnswer}
+              previewMode={false}
+            />
+          )}
+        </div>
+      </motion.main>
+    </>
   );
 };
 

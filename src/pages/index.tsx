@@ -19,7 +19,6 @@ import backSvg from "@/src/images/background_wawe.svg";
 
 export default function Home() {
   const router = useRouter();
-
   const { randomQuestionIds } = useExamStore();
 
   const { data: technologies, isLoading: isLoadingTech } =
@@ -46,12 +45,12 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="relative flex min-h-screen min-w-full justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 pb-10 lg:pt-16 "
+        className="relative flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900 via-gray-900  to-blue-900 pb-14 md:pb-8"
       >
         <div className="div-class">
           <Image src={backSvg} layout="fill" objectFit="cover" alt={""} />
         </div>
-        <div className="flex  h-full flex-col items-center justify-center space-y-4 px-10">
+        <div className="flex h-full flex-col items-center justify-center space-y-4 px-10">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -78,6 +77,7 @@ export default function Home() {
               </Link>
             </Button>
           </div>
+
           {isLoadingTech ? (
             <div className="flex h-full items-center justify-center">
               <div className="absolute bottom-1/3 right-1/2  translate-x-1/2 translate-y-1/2 transform ">
@@ -113,7 +113,7 @@ export default function Home() {
             </div>
           )}
         </div>
-        <Toaster />
+
         <footer className="absolute bottom-0 w-full">
           <div className="container mx-auto bg-transparent px-4">
             <div className="flex flex-col items-center justify-center">
@@ -134,6 +134,7 @@ export default function Home() {
           </div>
         </footer>
       </motion.main>
+      <Toaster />
     </>
   );
 }
