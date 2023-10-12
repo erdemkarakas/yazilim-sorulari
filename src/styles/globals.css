@@ -2,24 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* make background color top right gradient body dark gray to dark blue   background-image: linear-gradient(to top right, var(--tw-gradient-stops))  from #111827  to #1e3a8a*/
-
-@layer base {
-  body {
-    background-image: linear-gradient(to top right, #0e1420, #1e3a8a);
-  }
-}
-/* make duration for background image left to right */
-
-@keyframes waveAnimation {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 100% 0;
-  }
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;

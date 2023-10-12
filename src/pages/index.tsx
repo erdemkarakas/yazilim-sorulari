@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
@@ -13,8 +14,8 @@ import { useExamStore } from "../store";
 import { type Technology } from "@/src/store/index";
 import Tilt from "react-parallax-tilt";
 import Image from "next/image";
-import logo from "@/src/images/logo.png";
-import backgroundWawe from "@/src/images/background_wawe.png";
+import logo from "@/src/images/yazilimSorularoLogo.svg";
+import backSvg from "@/src/images/background_wawe.svg";
 
 export default function Home() {
   const router = useRouter();
@@ -38,66 +39,28 @@ export default function Home() {
       console.error(error);
     }
   };
-  const title1 = "Yazılım ";
-  const title2 = "Soruları";
+
   return (
     <>
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        style={{
-          backgroundImage: `url(${backgroundWawe.src})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-        className="relative flex min-h-screen min-w-full bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 pb-10 lg:pt-16 "
+        className="relative flex min-h-screen min-w-full justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 pb-10 lg:pt-16 "
       >
+        <div className="div-class">
+          <Image src={backSvg} layout="fill" objectFit="cover" alt={""} />
+        </div>
         <div className="flex  h-full flex-col items-center justify-center space-y-4 px-10">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="md:pb-12">
-              <Image src={logo} alt={"logo"} />
+            <div className="">
+              <Image src={logo} alt={"logo"} width={400} height={180} />
             </div>
           </motion.div>
-
-          {/* {!isLoadingTech && (
-            <motion.div className="text flex flex-row items-center justify-center gap-1">
-              {title1.split("").map((letter, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2, delay: index * 0.1 }}
-                  className="text-center text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] sm:text-[5rem]"
-                >
-                  {letter}
-                </motion.span>
-              ))}
-              <div className="rounded-lg bg-white bg-opacity-75 px-4 py-1">
-                {title2.split("").map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.2, delay: index * 0.1 + 0.8 }}
-                    className="text-center text-5xl font-extrabold tracking-tight text-[#021e6d] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] sm:text-[5rem]"
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-          )} */}
-          {/* <h1 className="text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            <Link href={"/"}>
-              Yazılım <span className="text-[hsl(212,100%,70%)]">Soruları</span>
-            </Link>
-          </h1> */}
 
           <div className="flex lg:absolute lg:right-16 lg:top-14">
             <Button
@@ -115,7 +78,7 @@ export default function Home() {
             </Button>
           </div>
           {isLoadingTech ? (
-            <div className="flex h-full justify-center">
+            <div className="flex h-full items-center justify-center">
               <div className="absolute bottom-1/3 right-1/2  translate-x-1/2 translate-y-1/2 transform ">
                 <div className="border-white-400 h-40 w-40  animate-spin rounded-full border-8 border-solid border-t-transparent"></div>
               </div>
