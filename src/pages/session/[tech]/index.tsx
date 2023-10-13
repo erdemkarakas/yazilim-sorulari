@@ -113,7 +113,9 @@ export default function TechSessionPage() {
         </div>
         {
           <div className="absolute mx-4 flex flex-col space-y-6 rounded-lg bg-white p-6 md:p-12">
-            <Badge className="w-48 text-xl">Test Çözüm Modu</Badge>
+            <Badge className="w-48 rounded-xl bg-sky-950 text-xl hover:bg-sky-950">
+              Test Çözüm Modu
+            </Badge>
 
             <RadioGroup
               className="rounded-xl border-2 border-solid p-4"
@@ -220,21 +222,53 @@ export default function TechSessionPage() {
                 </Label>
               </div> */}
             </div>
-            <div className="flex w-full flex-row justify-between px-1">
-              <Button
-                onClick={() => router.back()}
-                className="h-10 md:h-14 md:text-xl"
-                size={"xl"}
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" /> Geri Dön
-              </Button>
-              <Button
-                onClick={handleSessionStart}
-                className="h-10 md:h-14 md:text-xl"
-                size={"xl"}
-              >
-                <Play className="mr-2 h-4 w-4" /> Başla
-              </Button>
+            <div className="flex w-full flex-row justify-between ">
+              <div>
+                {" "}
+                <button
+                  onClick={() => router.back()}
+                  className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-8 py-3 transition group-hover:hover:text-white"
+                >
+                  <div className="absolute inset-0 flex items-center [container-type:inline-size]">
+                    <div className="absolute h-[100cqw] w-[100cqw] animate-spin bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 [animation-duration:3s] group-hover:opacity-100"></div>
+                  </div>
+
+                  <div className="absolute inset-0.5 rounded-2xl bg-sky-950"></div>
+
+                  <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
+                  <div></div>
+                  <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-lg font-medium text-transparent transition-all duration-200 hover:text-white">
+                    <div className="flex flex-row items-center">
+                      {" "}
+                      <ArrowLeft color="white" className="mr-2 h-4 w-4" />
+                      Ana sayfa
+                    </div>
+                  </span>
+                </button>
+              </div>
+              <div>
+                {" "}
+                <button
+                  onClick={handleSessionStart}
+                  className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-8 py-3 transition group-hover:hover:text-white"
+                >
+                  <div className="absolute inset-0 flex items-center [container-type:inline-size]">
+                    <div className="absolute h-[100cqw] w-[100cqw] animate-spin bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 [animation-duration:3s] group-hover:opacity-100"></div>
+                  </div>
+
+                  <div className="absolute inset-0.5 rounded-2xl bg-sky-950"></div>
+
+                  <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
+                  <div></div>
+                  <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-lg font-medium text-transparent transition-all duration-200 hover:text-white">
+                    <div className="flex flex-row items-center">
+                      {" "}
+                      <Play color="white" className="mr-2 h-4 w-4" />
+                      Başla
+                    </div>
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         }
