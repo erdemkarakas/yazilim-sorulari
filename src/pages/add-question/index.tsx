@@ -146,7 +146,7 @@ export default function AddQuestion() {
   return (
     <>
       <motion.main className="absolute flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
-        <div className="flex w-full flex-col px-14">
+        <div className="flex w-2/3 flex-col ">
           <div className="flex flex-row items-center justify-center space-x-6">
             {" "}
             <div className="flex ">
