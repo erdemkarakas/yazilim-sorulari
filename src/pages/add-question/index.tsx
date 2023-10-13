@@ -383,7 +383,7 @@ export default function AddQuestion() {
                     render={({ field }) => (
                       <FormItem>
                         <div className="space-y-2">
-                          <FormLabel>C Şıkkı:</FormLabel>
+                          <FormLabel>C şıkkı:</FormLabel>
                           <FormControl>
                             <Input placeholder="C şıkkı" {...field} />
                           </FormControl>
@@ -398,7 +398,7 @@ export default function AddQuestion() {
                     render={({ field }) => (
                       <FormItem>
                         <div className="space-y-2">
-                          <FormLabel>D Şıkkı:</FormLabel>
+                          <FormLabel>D şıkkı:</FormLabel>
                           <FormControl>
                             <Input placeholder="D şıkkı" {...field} />
                           </FormControl>
