@@ -54,7 +54,7 @@ const QuestionPage = () => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
         />
       </Head>
-      <motion.main className="absolute flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
+      <motion.main className="absolute flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr  from-gray-900  via-gray-900  to-cyan-900 ">
         <div className="flex">
           <motion.div
             initial={{ opacity: 0 }}
@@ -67,7 +67,7 @@ const QuestionPage = () => {
             </div>
           </motion.div>
         </div>
-        <div className="flex flex-col items-center px-4 py-6 md:w-[900px]">
+        <div className="flex w-full  flex-col items-center px-2 py-2 sm:w-4/6">
           {question && (
             <QuestionCard
               key={question.id}

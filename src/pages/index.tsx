@@ -57,10 +57,10 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="relative flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900 via-gray-900  to-blue-900 pb-14 md:pb-8"
+        className="relative flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900 via-gray-900  to-cyan-900 pb-14 md:pb-8"
       >
-        <div className="div-class">
-          <Image src={backSvg} layout="fill" objectFit="cover" alt={""} />
+        <div style={{ width: "100%", height: "100%" }}>
+          <Image fill src={backSvg} className="object-cover" alt={""} />
         </div>
         <div className="flex h-full flex-col items-center justify-center space-y-4 px-10">
           <motion.div
@@ -70,7 +70,12 @@ export default function Home() {
             className="mr-10"
           >
             <div className="">
-              <Image src={logo} alt={"logo"} width={400} height={180} />
+              <Image
+                src={logo}
+                priority={true}
+                alt={"logo"}
+                className="w-[400px] object-contain"
+              />
             </div>
           </motion.div>
 
@@ -126,14 +131,14 @@ export default function Home() {
           )}
         </div>
 
-        <footer className="absolute bottom-0 w-full">
+        <footer className="absolute bottom-0 w-full bg-transparent">
           <div className="container mx-auto bg-transparent px-4">
             <div className="flex flex-col items-center justify-center">
               <span className="font-sans text-sm font-medium text-white">
                 Erdem Karakaş @2023 {/* link to erdemkarkas.dev */}
                 <Link
                   href="https://erdemkarakas.dev"
-                  className="text-blue-200 hover:underline"
+                  className="text-cyan-200 hover:underline"
                   target="_blank"
                 >
                   erdemkarakas.dev

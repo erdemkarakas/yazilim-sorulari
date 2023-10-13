@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 
 import { Badge } from "@/components/ui/badge";
@@ -9,8 +9,11 @@ import { useExamStore } from "@/src/store";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX } from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/router";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
@@ -30,7 +33,6 @@ interface QuestionProps {
 }
 
 const QuestionCard: React.FC<QuestionProps> = ({
-  technology,
   questionText,
   questionCode,
   anwerExplanation,
@@ -42,8 +44,11 @@ const QuestionCard: React.FC<QuestionProps> = ({
   previewMode = false,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const { selectedTechnology } = useExamStore();
-
+  const { selectedTechnology, examType, randomQuestionIds, soundEnabled } =
+    useExamStore();
+  const router = useRouter();
+  const { questionId } = router.query;
+  const [progress, setProgress] = useState(0);
   const handleAnswer = (key: string) => {
     setSelectedAnswer(key);
   };
@@ -53,15 +58,38 @@ const QuestionCard: React.FC<QuestionProps> = ({
     { key: "c", text: answerC },
     { key: "d", text: answerD },
   ];
+  useEffect(() => {
+    const currentIndex = randomQuestionIds.findIndex(
+      (qId) => qId == Number(questionId),
+    );
+    setProgress((currentIndex / randomQuestionIds.length) * 100);
+  }, [questionId, randomQuestionIds]);
 
+  const handleSound = (e: boolean) => {
+    useExamStore.setState({ soundEnabled: e });
+  };
   return (
     <div
       className={classNames(
-        "mb:mt-4 h-[80%] w-[100%] space-y-4 overflow-y-auto rounded-xl bg-white pt-10 shadow-2xl",
+        "mb:mt-4 relative h-[80%] w-[100%] space-y-4 overflow-y-auto rounded-lg bg-white pt-10 shadow-2xl",
 
         "transition-colors duration-500",
       )}
     >
+      <div
+        className="loading absolute top-0 z-40 h-1 w-[0%] bg-cyan-700 transition-all duration-200"
+        style={{ width: `${progress}%` }}
+      ></div>
+
+      <div className="absolute right-2 top-2 flex items-center space-x-2">
+        {soundEnabled ? <Volume2 /> : <VolumeX />}
+        <Switch
+          checked={soundEnabled}
+          onCheckedChange={handleSound}
+          id="sound-mode"
+        />
+        <Label htmlFor="sound-mode"></Label>
+      </div>
       <Badge
         className={`ml-5 w-fit ${
           selectedTechnology.technologyAlias == "js"
@@ -114,34 +142,45 @@ const QuestionCard: React.FC<QuestionProps> = ({
             className="flex flex-row gap-x-[2px]"
           >
             <div
-              className={`flex h-full items-center rounded-xl border-2 border-solid   px-4 pr-4 text-xl uppercase  ${
+              className={`flex h-full items-center rounded-lg border-2 border-solid px-4 pr-4 text-xl uppercase  ${
                 selectedAnswer === option.key &&
-                selectedAnswer === correctAnswer
-                  ? "rounded-xl border-2 border-solid border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
+                selectedAnswer === correctAnswer &&
+                examType === "informDuringSession"
+                  ? "rounded-lg border-2 border-solid border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
                   : selectedAnswer === option.key &&
-                    selectedAnswer !== correctAnswer
-                  ? "rounded-xl border-2 border-solid border-red-500  bg-red-400 font-semibold  text-white  hover:bg-red-200 "
-                  : "rounded-xl border-2 border-solid hover:bg-slate-100"
+                    examType === "informSessionEnd"
+                  ? "rounded-lg border-2 border-solid  border-gray-600 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] "
+                  : selectedAnswer === option.key &&
+                    selectedAnswer !== correctAnswer &&
+                    examType === "informDuringSession"
+                  ? "rounded-lg border-2 border-solid border-red-500  bg-red-400 font-semibold  text-white  hover:bg-red-200 "
+                  : "rounded-lg border-2 border-solid hover:bg-slate-100"
               }`}
             >
-              {option.key}
+              {option.key}.
             </div>
             <motion.button
-              className={`flex h-14 w-full items-center gap-2  pl-2 text-left text-lg ${
+              className={`flex h-14 w-full items-center gap-2  pl-2 text-left sm:text-lg ${
                 selectedAnswer === option.key &&
-                selectedAnswer === correctAnswer
-                  ? "rounded-xl border-2 border-solid  border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
+                selectedAnswer === correctAnswer &&
+                examType === "informDuringSession"
+                  ? "rounded-lg border-2 border-solid  border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
                   : selectedAnswer === option.key &&
-                    selectedAnswer !== correctAnswer
-                  ? "rounded-xl border-2 border-solid border-red-500 bg-red-400 font-semibold text-white  hover:bg-red-200 "
-                  : "rounded-xl border-2 border-solid hover:bg-slate-100"
+                    examType === "informSessionEnd"
+                  ? "rounded-lg border-2 border-solid  border-gray-600  shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]  "
+                  : selectedAnswer === option.key &&
+                    selectedAnswer !== correctAnswer &&
+                    examType === "informDuringSession"
+                  ? "rounded-lg border-2 border-solid border-red-500 bg-red-400 font-semibold text-white  hover:bg-red-200 "
+                  : "rounded-lg border-2 border-solid hover:bg-slate-100"
               }`}
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9 }}
               animate={
                 selectedAnswer === option.key &&
-                selectedAnswer !== correctAnswer
+                selectedAnswer !== correctAnswer &&
+                examType === "informDuringSession"
                   ? { x: [-10, 10, -10, 10, 0] }
                   : { x: 0 }
               }
@@ -161,16 +200,14 @@ const QuestionCard: React.FC<QuestionProps> = ({
       )}
       <div className="grid w-full grid-cols-2 divide-x-2">
         <div>
-          <Button className="h-14 w-full gap-x-4 rounded-none bg-gradient-to-r from-cyan-700 to-blue-700 hover:from-cyan-600 hover:to-blue-600">
-            {" "}
+          <Button className="hover:from-cyan-850 h-14 w-full gap-x-4 rounded-none border-2 border-slate-400 bg-gradient-to-l from-cyan-900 to-gray-900 text-xl hover:to-cyan-600">
             <ArrowLeft />
-            GERİ
+            Geri
           </Button>
         </div>
         <div>
-          <Button className="h-14 w-full gap-x-4 rounded-none  bg-gradient-to-l from-cyan-700 to-blue-700  hover:from-cyan-600 hover:to-blue-600">
-            {" "}
-            İLER
+          <Button className="h-14 w-full gap-x-4 rounded-none border-2  border-slate-400 bg-gradient-to-l from-gray-900 to-cyan-900 text-xl  hover:from-cyan-600 ">
+            Cevapla
             <ArrowRight />
           </Button>
         </div>

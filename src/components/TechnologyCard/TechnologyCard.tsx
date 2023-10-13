@@ -49,7 +49,7 @@ const TechnologyCard: React.FC<TechnologyCardProps> = ({
 
   return (
     <div
-      className="flex min-w-full cursor-pointer flex-row items-center justify-around space-x-4 rounded-[2.25rem] bg-slate-200 px-16 py-10 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] transition duration-300 hover:scale-110 hover:bg-white  md:mx-auto md:max-w-2xl lg:space-x-4"
+      className="group flex  min-w-full cursor-pointer flex-row items-center justify-around space-x-4 rounded-[2.25rem] bg-slate-200 px-16 py-10 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] transition duration-300 hover:scale-110 hover:bg-white  md:mx-auto md:max-w-2xl lg:space-x-4"
       key={item.technologyId}
       onClick={onClick}
     >
@@ -62,7 +62,7 @@ const TechnologyCard: React.FC<TechnologyCardProps> = ({
       />
 
       <div className="flex flex-col justify-center">
-        <h1 className=" text-center text-2xl font-bold text-[#020F66]  xl:text-3xl">
+        <h1 className=" text-center text-2xl font-bold text-cyan-950  group-hover:text-cyan-900  xl:text-3xl">
           {item.technologyName}
         </h1>
       </div>
