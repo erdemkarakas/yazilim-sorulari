@@ -16,6 +16,7 @@ import Tilt from "react-parallax-tilt";
 import Image from "next/image";
 import logo from "@/src/images/yazilimSorularoLogo.svg";
 import backSvg from "@/src/images/background_wawe.svg";
+import Head from "next/head";
 
 export default function Home() {
   const router = useRouter();
@@ -41,6 +42,17 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Yazılım Soruları</title>
+        <meta
+          name="description"
+          content="Yazılım dilleri ile ilgili süreli süresiz test sitesi."
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
+        />
+      </Head>
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

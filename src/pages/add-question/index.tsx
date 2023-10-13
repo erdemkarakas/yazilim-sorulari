@@ -39,6 +39,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import logo from "@/src/images/yazilimSorularoLogo.svg";
 import { UploadCloud } from "lucide-react";
+import Head from "next/head";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
@@ -145,6 +146,17 @@ export default function AddQuestion() {
 
   return (
     <>
+      <Head>
+        <title>Yazılım Soruları Soru Yükle</title>
+        <meta
+          name="description"
+          content="Yazılım dilleri ile ilgili süreli süresiz test sitesi."
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
+        />
+      </Head>
       <motion.main className="absolute flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
         <div className="flex w-2/3 flex-col ">
           <div className="flex flex-row items-center justify-center space-x-6">

@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import logo from "@/src/images/yazilimSorularoLogo.svg";
 import backSvg from "@/src/images/background_wawe.svg";
+import Head from "next/head";
 
 const QuestionPage = () => {
   const router = useRouter();
@@ -42,6 +43,17 @@ const QuestionPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Yazılım Soruları Sınav</title>
+        <meta
+          name="description"
+          content="Yazılım dilleri ile ilgili süreli süresiz test sitesi."
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
+        />
+      </Head>
       <motion.main className="absolute flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
         <div className="flex">
           <motion.div

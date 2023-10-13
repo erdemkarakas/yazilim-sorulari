@@ -63,7 +63,7 @@ const TechnologyCard: React.FC<TechnologyCardProps> = ({
 
       <div className="flex flex-col justify-center">
         <h1 className=" text-center text-2xl font-bold text-[#020F66]  xl:text-3xl">
-          {item.technologyName.toUpperCase()}
+          {item.technologyName}
         </h1>
       </div>
     </div>

@@ -31,6 +31,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from "@/src/images/yazilimSorularoLogo.svg";
 import backSvg from "@/src/images/background_wawe.svg";
+import Head from "next/head";
 
 export default function TechSessionPage() {
   const router = useRouter();
@@ -79,6 +80,17 @@ export default function TechSessionPage() {
 
   return (
     <>
+      <Head>
+        <title>Yazılım Soruları Çözüm Modu</title>
+        <meta
+          name="description"
+          content="Yazılım dilleri ile ilgili süreli süresiz test sitesi."
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
+        />
+      </Head>
       <motion.main className="absolute flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
         <div className="z-auto">
           <Image src={backSvg} layout="fill" objectFit="cover" alt={""} />
@@ -174,7 +186,6 @@ export default function TechSessionPage() {
             <div className="flex flex-row items-center space-x-6 px-4">
               <div className="flex items-center justify-center space-x-2 ">
                 <Label className="md:text-xl" htmlFor="r1">
-                  {" "}
                   Soru sayısı
                 </Label>
                 <Select
@@ -224,10 +235,9 @@ export default function TechSessionPage() {
             </div>
             <div className="flex w-full flex-row justify-between ">
               <div>
-                {" "}
                 <button
                   onClick={() => router.back()}
-                  className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-8 py-3 transition group-hover:hover:text-white"
+                  className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-8 py-3 transition "
                 >
                   <div className="absolute inset-0 flex items-center [container-type:inline-size]">
                     <div className="absolute h-[100cqw] w-[100cqw] animate-spin bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 [animation-duration:3s] group-hover:opacity-100"></div>
@@ -236,10 +246,9 @@ export default function TechSessionPage() {
                   <div className="absolute inset-0.5 rounded-2xl bg-sky-950"></div>
 
                   <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
-                  <div></div>
+
                   <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-lg font-medium text-transparent transition-all duration-200 hover:text-white">
                     <div className="flex flex-row items-center">
-                      {" "}
                       <ArrowLeft color="white" className="mr-2 h-4 w-4" />
                       Ana sayfa
                     </div>
@@ -247,10 +256,9 @@ export default function TechSessionPage() {
                 </button>
               </div>
               <div>
-                {" "}
                 <button
                   onClick={handleSessionStart}
-                  className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-8 py-3 transition group-hover:hover:text-white"
+                  className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-8 py-3 transition "
                 >
                   <div className="absolute inset-0 flex items-center [container-type:inline-size]">
                     <div className="absolute h-[100cqw] w-[100cqw] animate-spin bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 [animation-duration:3s] group-hover:opacity-100"></div>
@@ -259,10 +267,9 @@ export default function TechSessionPage() {
                   <div className="absolute inset-0.5 rounded-2xl bg-sky-950"></div>
 
                   <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
-                  <div></div>
+
                   <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-lg font-medium text-transparent transition-all duration-200 hover:text-white">
                     <div className="flex flex-row items-center">
-                      {" "}
                       <Play color="white" className="mr-2 h-4 w-4" />
                       Başla
                     </div>
