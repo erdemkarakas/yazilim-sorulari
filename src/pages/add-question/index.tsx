@@ -79,19 +79,19 @@ export default function AddQuestion() {
       .min(4, {
         message: "Soru en az 5 karakterden oluşmalıdır.",
       })
-      .max(160, {
-        message: "Soru en fazla 160 karakterden oluşmalıdır.",
+      .max(500, {
+        message: "Soru en fazla 500 karakterden oluşmalıdır.",
       }),
     questionCode: z
       .string()
-      .max(200, {
-        message: "Kod en fazla 200 karakterden oluşmalıdır.",
+      .max(500, {
+        message: "Kod en fazla 500 karakterden oluşmalıdır.",
       })
       .optional(),
     answerExplanation: z
       .string()
-      .max(250, {
-        message: "Açıklama en fazla 250 karakterden oluşmalıdır.",
+      .max(800, {
+        message: "Açıklama en fazla 800 karakterden oluşmalıdır.",
       })
       .optional(),
     answerA: z.string().min(2, {
