@@ -16,15 +16,7 @@ import { Switch } from "@/components/ui/switch";
 import { api } from "@/src/lib/api";
 import { type ExamType, useExamStore } from "@/src/store";
 import { motion } from "framer-motion";
-import {
-  ArrowLeft,
-  Play,
-  Volume2,
-  VolumeX,
-  TimerOff,
-  Timer,
-  UploadCloud,
-} from "lucide-react";
+import { ArrowLeft, Play, TimerOff, Timer, UploadCloud } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -32,7 +24,6 @@ import Image from "next/image";
 import logo from "@/src/images/yazilimSorularoLogo.svg";
 import backSvg from "@/src/images/background_wawe.svg";
 import Head from "next/head";
-import { Toast } from "react-bootstrap";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 

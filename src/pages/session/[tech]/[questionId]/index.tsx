@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Button } from "@/components/ui/button";
 import React from "react";
 import { useRouter } from "next/router";
 import { api } from "@/src/lib/api";
@@ -8,7 +7,6 @@ import QuestionCard from "@/src/components/QuestionCard/QuestionCard";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import logo from "@/src/images/yazilimSorularoLogo.svg";
-import backSvg from "@/src/images/background_wawe.svg";
 import Head from "next/head";
 
 const QuestionPage = () => {
