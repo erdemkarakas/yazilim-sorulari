@@ -21,11 +21,11 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import logo from "@/src/images/yazilimSorularoLogo.svg";
 import backSvg from "@/src/images/background_wawe.svg";
 import Head from "next/head";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import logo from "@/src/images/yazilimSorulariLogo.png";
 
 export default function TechSessionPage() {
   const router = useRouter();
@@ -113,7 +113,7 @@ export default function TechSessionPage() {
             className="relative bottom-56 left-0 z-10 md:bottom-72 md:left-0"
           >
             <div className="h-36 w-64 md:h-full md:w-full">
-              <Image src={logo} alt={"logo"} width={400} height={180} />
+              <Image src={logo} width={400} height={180} alt={"logo"} />
             </div>
           </motion.div>
 
@@ -123,7 +123,7 @@ export default function TechSessionPage() {
               href={"/add-question"}
             >
               <Button
-                className="rounded-3xl transition duration-500 hover:scale-125"
+                className="rounded-3xl text-cyan-900 transition duration-500 hover:scale-125"
                 variant={"outline"}
                 size={"xl"}
               >
@@ -135,7 +135,7 @@ export default function TechSessionPage() {
         </div>
         {
           <div className="absolute mx-4 flex flex-col space-y-6 rounded-lg bg-white p-6 md:p-12">
-            <Badge className="w-48 rounded-xl bg-sky-950 text-xl hover:bg-sky-950">
+            <Badge className="w-48 rounded-xl bg-sky-950 text-base hover:bg-sky-950">
               Test Çözüm Modu
             </Badge>
 

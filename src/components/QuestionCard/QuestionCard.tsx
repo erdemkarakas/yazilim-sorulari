@@ -96,10 +96,10 @@ const QuestionCard: React.FC<QuestionProps> = ({
           <Label htmlFor="sound-mode"></Label>
         </div>
       )}
-      <div className="flex flex-col gap-x-2 px-4">
+      <div className="flex flex-col gap-x-2 px-2 md:px-4">
         {" "}
         <Badge
-          className={`mb-2 ml-4 w-fit ${
+          className={`mb-2 w-fit md:ml-4 ${
             selectedTechnology.technologyAlias == "js"
               ? "bg-yellow-200"
               : selectedTechnology.technologyAlias == "go"
@@ -122,9 +122,11 @@ const QuestionCard: React.FC<QuestionProps> = ({
         >
           {selectedTechnology.technologyName}
         </Badge>
-        <h2 className="mb-4 ml-5 text-lg font-bold">{questionText}</h2>
+        <h2 className="mb-4 ml-2 font-bold md:ml-5 md:text-lg">
+          {questionText}
+        </h2>
         {questionCode && (
-          <div className="space-y-2 px-5">
+          <div className="space-y-2 md:px-5">
             <CodeEditor
               language="js"
               value={questionCode}
@@ -141,7 +143,7 @@ const QuestionCard: React.FC<QuestionProps> = ({
             />
           </div>
         )}
-        <div className="mt-2 grid grid-cols-1 gap-2 px-4">
+        <div className="mt-2 grid grid-cols-1 gap-2 md:first-letter:px-4">
           {options.map((option, index) => (
             <div
               onClick={() => {

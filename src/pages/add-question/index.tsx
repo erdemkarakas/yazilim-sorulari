@@ -36,7 +36,7 @@ import Link from "next/link";
 import { Toaster } from "@/components/ui/toaster";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import logo from "@/src/images/yazilimSorularoLogo.svg";
+import logo from "@/src/images/yazilimSorulariLogo.png";
 import { UploadCloud } from "lucide-react";
 import Head from "next/head";
 

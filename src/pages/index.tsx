@@ -14,9 +14,9 @@ import { useExamStore } from "../store";
 import { type Technology } from "@/src/store/index";
 import Tilt from "react-parallax-tilt";
 import Image from "next/image";
-import logo from "@/src/images/yazilimSorularoLogo.svg";
 import backSvg from "@/src/images/background_wawe.svg";
 import Head from "next/head";
+import logo from "@/src/images/yazilimSorulariLogo.png";
 
 export default function Home() {
   const router = useRouter();
@@ -69,7 +69,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mr-10"
           >
-            <div className="">
+            <div className="md:mb-20">
               <Image
                 src={logo}
                 priority={true}
@@ -85,7 +85,7 @@ export default function Home() {
               href={"/add-question"}
             >
               <Button
-                className="rounded-3xl transition duration-500 hover:scale-125"
+                className="rounded-3xl text-cyan-900 transition duration-500 hover:scale-125"
                 variant={"outline"}
                 size={"xl"}
               >

@@ -6,8 +6,9 @@ import { useExamStore } from "@/src/store";
 import QuestionCard from "@/src/components/QuestionCard/QuestionCard";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import logo from "@/src/images/yazilimSorularoLogo.svg";
+import logo from "@/src/images/yazilimSorulariLogo.png";
 import Head from "next/head";
+import { Timer } from "lucide-react";
 
 const QuestionPage = () => {
   const router = useRouter();
@@ -60,12 +61,42 @@ const QuestionPage = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="z-auto"
           >
-            <div className="">
-              <Image src={logo} alt={"logo"} width={400} height={180} />
+            <div className="3xl:top-20 absolute left-1/2 top-2 w-auto -translate-x-1/2  ">
+              <Image
+                className="aspect-w-16 aspect-h-9 w-52 md:w-80"
+                src={logo}
+                alt={"logo"}
+                width={200}
+                height={150}
+              />
             </div>
           </motion.div>
+          <div className="absolute left-4 top-2 flex flex-col rounded-xl border-solid text-lg  font-bold text-white md:left-10 md:top-20 md:border-2 md:bg-white md:p-3 md:text-cyan-900">
+            <div>
+              <div className="flex flex-row border-solid border-cyan-900 md:border-b-2">
+                <span className="mr-2 hidden  sm:block">Kalan Süre</span>
+                <Timer className="hidden md:block" />
+              </div>
+            </div>
+            <div className="flex">
+              <span>10:00</span>
+            </div>
+          </div>
+
+          <div className="absolute right-4 top-2 flex flex-col rounded-xl border-solid text-lg  font-bold text-white md:right-20  md:top-20 md:border-2 md:bg-white md:p-3 md:text-cyan-900">
+            <div>
+              <div className="hidden border-b-2 border-solid border-cyan-900 md:block">
+                <span className="hidden  md:block">Soru:</span>
+              </div>
+
+              <span>
+                {" "}
+                <span className="text-3xl">1</span> /10
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="flex w-full  flex-col items-center px-2 py-2 sm:w-4/6">
+        <div className="flex w-full  flex-col  items-center px-2 py-2 sm:w-4/6 md:mt-20">
           {question && (
             <QuestionCard
               key={question.id}
