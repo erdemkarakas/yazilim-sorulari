@@ -67,7 +67,6 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mr-10"
           >
             <div className="md:mb-20">
               <Image
