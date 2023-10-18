@@ -85,15 +85,17 @@ const QuestionCard: React.FC<QuestionProps> = ({
         style={{ width: `${progress}%` }}
       ></div>
 
-      <div className="absolute right-2 top-2 flex items-center space-x-2">
-        {soundEnabled ? <Volume2 /> : <VolumeX />}
-        <Switch
-          checked={soundEnabled}
-          onCheckedChange={handleSound}
-          id="sound-mode"
-        />
-        <Label htmlFor="sound-mode"></Label>
-      </div>
+      {!previewMode && (
+        <div className="absolute right-2 top-2 flex items-center space-x-2">
+          {soundEnabled ? <Volume2 /> : <VolumeX />}
+          <Switch
+            checked={soundEnabled}
+            onCheckedChange={handleSound}
+            id="sound-mode"
+          />
+          <Label htmlFor="sound-mode"></Label>
+        </div>
+      )}
       <div className="flex flex-col gap-x-2 px-4">
         {" "}
         <Badge
@@ -142,7 +144,9 @@ const QuestionCard: React.FC<QuestionProps> = ({
         <div className="mt-2 grid grid-cols-1 gap-2 px-4">
           {options.map((option, index) => (
             <div
-              onClick={() => handleAnswer(option.key)}
+              onClick={() => {
+                if (!previewMode) handleAnswer(option.key);
+              }}
               key={index}
               className="flex flex-row gap-x-[2px]"
             >
@@ -182,6 +186,7 @@ const QuestionCard: React.FC<QuestionProps> = ({
                 initial={{ scale: 1 }}
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.9 }}
+                disabled={previewMode}
                 animate={
                   selectedAnswer === option.key &&
                   selectedAnswer !== correctAnswer &&
@@ -198,28 +203,37 @@ const QuestionCard: React.FC<QuestionProps> = ({
             </div>
           ))}
         </div>
+        {previewMode && (
+          <div className="ml-4 mt-4 flex flex-row gap-1">
+            <h4 className="text-lg font-bold">Doğru Cevap:</h4>
+            <h4 className="text-lg font-bold text-cyan-600">
+              {correctAnswer.toUpperCase()}
+            </h4>
+          </div>
+        )}
         {anwerExplanation && previewMode && (
-          <div className="mt-4">
+          <div className="mt-4 px-4">
             <h3 className="text-lg font-bold">Açıklama</h3>
             <Textarea readOnly defaultValue={anwerExplanation} />
           </div>
         )}
       </div>
-
-      <div className="grid w-full grid-cols-2 divide-x-2">
-        <div>
-          <Button className="hover:from-cyan-850 h-14 w-full gap-x-4 rounded-none border-2 border-slate-400 bg-gradient-to-l from-cyan-900 to-gray-900 text-xl hover:to-cyan-600">
-            <ArrowBigLeftDash size={30} />
-            Geri
-          </Button>
+      {!previewMode && (
+        <div className="grid w-full grid-cols-2 divide-x-2">
+          <div>
+            <Button className="hover:from-cyan-850 h-14 w-full gap-x-4 rounded-none border-2 border-slate-400 bg-gradient-to-l from-cyan-900 to-gray-900 text-xl hover:to-cyan-600">
+              <ArrowBigLeftDash size={30} />
+              Geri
+            </Button>
+          </div>
+          <div>
+            <Button className="h-14 w-full gap-x-4 rounded-none border-2  border-slate-400 bg-gradient-to-l from-gray-900 to-cyan-900 text-xl  hover:from-cyan-600 ">
+              Cevapla
+              <ArrowBigRightDash size={30} />
+            </Button>
+          </div>
         </div>
-        <div>
-          <Button className="h-14 w-full gap-x-4 rounded-none border-2  border-slate-400 bg-gradient-to-l from-gray-900 to-cyan-900 text-xl  hover:from-cyan-600 ">
-            Cevapla
-            <ArrowBigRightDash size={30} />
-          </Button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

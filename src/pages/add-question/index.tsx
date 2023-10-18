@@ -90,8 +90,8 @@ export default function AddQuestion() {
       .optional(),
     answerExplanation: z
       .string()
-      .max(800, {
-        message: "Açıklama en fazla 800 karakterden oluşmalıdır.",
+      .max(1000, {
+        message: "Açıklama en fazla 1000 karakterden oluşmalıdır.",
       })
       .optional(),
     answerA: z.string().min(2, {
@@ -157,7 +157,7 @@ export default function AddQuestion() {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
         />
       </Head>
-      <motion.main className="absolute flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-blue-900 ">
+      <motion.main className="absolute flex min-h-screen min-w-full flex-col items-center justify-center bg-gradient-to-tr from-gray-900  via-gray-900  to-cyan-900 ">
         <div className="flex w-2/3 flex-col ">
           <div className="flex flex-row items-center justify-center space-x-6">
             {" "}
@@ -190,25 +190,76 @@ export default function AddQuestion() {
                 previewMode={true}
               />
               <div className="mt-4 flex w-full flex-row justify-evenly px-6">
-                <Button
-                  className="gap-4 text-xl"
-                  size={"xl"}
-                  onClick={() => setPreviewMode(false)}
-                >
-                  <AiOutlineRollback size={30} /> Geri Dön
-                </Button>
-                <Button
-                  onClick={handleAddQuestion}
-                  className="gap-4 text-xl"
-                  size={"xl"}
-                >
-                  <AiOutlineUpload size={30} />
-                  Gönder
-                </Button>
+                <div>
+                  <button
+                    onClick={() => setPreviewMode(false)}
+                    className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-6 py-2 transition "
+                  >
+                    <div className="absolute inset-0 flex items-center [container-type:inline-size]">
+                      <div className="absolute h-[100cqw] w-[100cqw] animate-spin bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 [animation-duration:3s] group-hover:opacity-100"></div>
+                    </div>
+
+                    <div className="absolute inset-0.5 rounded-2xl bg-sky-950"></div>
+
+                    <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
+
+                    <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-base font-medium text-transparent transition-all duration-200 group-hover:text-white">
+                      <div className="flex flex-row items-center">
+                        <AiOutlineRollback color="white" size={30} /> Geri Dön
+                      </div>
+                    </span>
+                  </button>
+                </div>
+
+                <div>
+                  <button
+                    onClick={handleAddQuestion}
+                    disabled={addQuestionMutation.isLoading}
+                    className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-6 py-2 transition "
+                  >
+                    <div className="absolute inset-0 flex items-center [container-type:inline-size]">
+                      <div className="absolute h-[100cqw] w-[100cqw] animate-spin bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 [animation-duration:3s] group-hover:opacity-100"></div>
+                    </div>
+
+                    <div className="absolute inset-0.5 rounded-2xl bg-sky-950"></div>
+
+                    <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
+
+                    <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-base font-medium text-transparent transition-all duration-200 group-hover:text-white">
+                      <div className="flex flex-row items-center">
+                        <AiOutlineUpload color="white" size={30} />
+                        Gönder
+                      </div>
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           ) : (
             <div className="w-full rounded-lg bg-white px-14 py-12">
+              <div className="flex justify-end">
+                {" "}
+                <Link href="/" passHref>
+                  <div>
+                    <button className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-6 py-2 transition ">
+                      <div className="absolute inset-0 flex items-center [container-type:inline-size]">
+                        <div className="absolute h-[100cqw] w-[100cqw] animate-spin bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 [animation-duration:3s] group-hover:opacity-100"></div>
+                      </div>
+
+                      <div className="absolute inset-0.5 rounded-2xl bg-sky-950"></div>
+
+                      <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
+
+                      <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-base font-medium text-transparent transition-all duration-200 group-hover:text-white">
+                        <div className="flex flex-row items-center">
+                          <AiOutlineRollback color="white" size={20} />
+                          Ana sayfaya
+                        </div>
+                      </span>
+                    </button>
+                  </div>
+                </Link>
+              </div>
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -322,43 +373,7 @@ export default function AddQuestion() {
                       </div>
                     </div>
                   )}
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      checked={answerHaveExplanation}
-                      onCheckedChange={(e: boolean) =>
-                        setAnswerHaveExplanation(Boolean(e))
-                      }
-                      id="answerExplanation"
-                    />
-                    <label
-                      htmlFor="terms"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Cevap ile ilgili bir açıklama var.
-                    </label>
-                  </div>
-                  {answerHaveExplanation && (
-                    <FormField
-                      control={form.control}
-                      name="answerExplanation"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel> Cevap açıklaması (Opsiyonel)</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Cevap açıklaması"
-                              className="mb-4 mt-6 max-h-[650px] resize-none overflow-x-auto rounded-lg border py-4 font-mono text-sm"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormDescription>
-                            Satır başlarına dikkat ediniz.
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  )}
+
                   <FormField
                     control={form.control}
                     name="answerA"
@@ -419,6 +434,43 @@ export default function AddQuestion() {
                       </FormItem>
                     )}
                   />
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      checked={answerHaveExplanation}
+                      onCheckedChange={(e: boolean) =>
+                        setAnswerHaveExplanation(Boolean(e))
+                      }
+                      id="answerExplanation"
+                    />
+                    <label
+                      htmlFor="terms"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Cevap ile ilgili bir açıklama var.
+                    </label>
+                  </div>
+                  {answerHaveExplanation && (
+                    <FormField
+                      control={form.control}
+                      name="answerExplanation"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel> Cevap açıklaması (Opsiyonel)</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Cevap açıklaması"
+                              className="mb-4 mt-6 max-h-[650px] resize-none overflow-x-auto rounded-lg border py-4 font-mono text-sm"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            Satır başlarına dikkat ediniz.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )}
                   <div className="space-y-2">
                     <FormField
                       control={form.control}
@@ -447,27 +499,33 @@ export default function AddQuestion() {
                       )}
                     />
                   </div>
-                  <div className="flex w-full flex-row justify-end ">
-                    <Button
-                      type="submit"
-                      onClick={() => {
-                        isFormValid && setPreviewMode(true);
-                      }}
-                      className="gap-2 text-xl"
-                      size={"xl"}
-                    >
-                      <MdOutlinePreview size={25} /> Önizle
-                    </Button>
+                  <div className="flex w-full flex-row justify-center ">
+                    <div>
+                      <button
+                        type="submit"
+                        onClick={() => {
+                          isFormValid && setPreviewMode(true);
+                        }}
+                        className="group  relative mx-auto inline-flex items-center overflow-hidden rounded-2xl bg-sky-900 px-8 py-3 transition "
+                      >
+                        <div className="absolute inset-0 flex items-center [container-type:inline-size]">
+                          <div className="absolute h-[100cqw] w-[100cqw] animate-spin bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 [animation-duration:3s] group-hover:opacity-100"></div>
+                        </div>
+
+                        <div className="absolute inset-0.5 rounded-2xl bg-sky-950"></div>
+
+                        <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
+
+                        <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-lg font-medium text-transparent transition-all duration-200 group-hover:text-white">
+                          <div className="flex flex-row items-center">
+                            <MdOutlinePreview color="white" size={25} /> Önizle
+                          </div>
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </form>
               </Form>
-
-              <Link href="/" passHref>
-                <Button className="gap-2 text-xl" size={"xl"}>
-                  <AiOutlineRollback size={25} />
-                  Ana sayfaya
-                </Button>
-              </Link>
             </div>
           )}
           <Toaster />

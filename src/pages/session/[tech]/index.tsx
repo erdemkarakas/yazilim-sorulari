@@ -32,9 +32,13 @@ import Image from "next/image";
 import logo from "@/src/images/yazilimSorularoLogo.svg";
 import backSvg from "@/src/images/background_wawe.svg";
 import Head from "next/head";
+import { Toast } from "react-bootstrap";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function TechSessionPage() {
   const router = useRouter();
+  const { toast } = useToast();
   const {
     examType,
     soundEnabled,
@@ -62,21 +66,26 @@ export default function TechSessionPage() {
     useExamStore.setState({ selectedQuestionCount: Number(count) });
   };
   const handleSessionStart = () => {
-    const randomNumbers = [];
+    const randomNumbers: number[] = [];
 
-    // while (randomNumbers.length < selectedQuestionCount) {
-    //   const randomNumber = Math.floor(
-    //     Math.random() * Number(totalQuestionsCount),
-    //   );
-    //   if (!randomNumbers.includes(randomNumber)) {
-    //     randomNumbers.push(randomNumber);
-    //   }
-    // }
+    if (!totalQuestionsCount || 10 > totalQuestionsCount) {
+      toast({
+        variant: "default",
+        title: "⚠️Soru sayısı yetersiz",
+        description: "Lütfen daha sonra tekrar deneyiniz.",
+      });
+      return;
+    }
 
     if (totalQuestionsCount) {
       for (let i = 0; i < selectedQuestionCount; i++) {
         const randomNumber =
           Math.floor(Math.random() * totalQuestionsCount) + 1;
+        if (randomNumbers.includes(randomNumber)) {
+          i--;
+          continue;
+        }
+
         randomNumbers.push(randomNumber);
       }
     }
@@ -296,6 +305,7 @@ export default function TechSessionPage() {
           </div>
         </footer>
       </motion.main>
+      <Toaster />
     </>
   );
 }
