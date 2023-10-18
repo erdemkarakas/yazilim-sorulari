@@ -250,7 +250,7 @@ export default function AddQuestion() {
                       <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
 
                       <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-base font-medium text-transparent transition-all duration-200 group-hover:text-white">
-                        <div className="flex flex-row items-center">
+                        <div className="flex flex-row items-center gap-2">
                           <AiOutlineRollback color="white" size={20} />
                           Ana sayfaya
                         </div>
@@ -516,7 +516,7 @@ export default function AddQuestion() {
                         <div className="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"></div>
 
                         <span className="font-mona relative mt-px bg-gradient-to-b from-white/75 to-white bg-clip-text text-lg font-medium text-transparent transition-all duration-200 group-hover:text-white">
-                          <div className="flex flex-row items-center">
+                          <div className="flex flex-row items-center gap-2">
                             <MdOutlinePreview color="white" size={25} /> Önizle
                           </div>
                         </span>
