@@ -68,7 +68,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="md:mb-20">
+            <div className="md:mb-14">
               <Image
                 src={logo}
                 priority={true}
