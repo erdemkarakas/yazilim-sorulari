@@ -47,6 +47,7 @@ const QuestionCard: React.FC<QuestionProps> = ({
   correctAnswer,
   previewMode = false,
 }) => {
+  const [currentIndex, setCurrentIndex] = React.useState(1);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const { selectedTechnology, examType, randomQuestionIds, soundEnabled } =
     useExamStore();
@@ -65,6 +66,9 @@ const QuestionCard: React.FC<QuestionProps> = ({
   useEffect(() => {
     const currentIndex = randomQuestionIds.findIndex(
       (qId) => qId == Number(questionId),
+    );
+    setCurrentIndex(
+      randomQuestionIds.findIndex((qId) => qId == Number(questionId)) + 1,
     );
     setProgress((currentIndex / randomQuestionIds.length) * 100);
   }, [questionId, randomQuestionIds]);
@@ -171,7 +175,7 @@ const QuestionCard: React.FC<QuestionProps> = ({
                 {option.key}.
               </div>
               <motion.button
-                className={`flex h-14 w-full items-center gap-2  pl-2 text-left sm:text-base ${
+                className={`flex h-14 w-full items-center gap-2  pl-3 text-left sm:text-base ${
                   selectedAnswer === option.key &&
                   selectedAnswer === correctAnswer &&
                   examType === "informDuringSession"
@@ -223,14 +227,21 @@ const QuestionCard: React.FC<QuestionProps> = ({
       {!previewMode && (
         <div className="grid w-full grid-cols-2 divide-x-2">
           <div>
-            <Button className="hover:from-cyan-850 h-14 w-full gap-x-4 rounded-none border-2 border-slate-400 bg-gradient-to-l from-cyan-900 to-gray-900 text-xl hover:to-cyan-600">
+            <Button
+              disabled={currentIndex === 1 ? false : true}
+              className={` h-14 w-full gap-x-4 rounded-none border-2 border-slate-400  ${
+                currentIndex === 1
+                  ? "pointer-events-none bg-gray-700 text-xl"
+                  : "bg-gradient-to-l  from-cyan-900 to-gray-900 text-xl hover:to-cyan-600"
+              }`}
+            >
               <ArrowBigLeftDash size={30} />
               Geri
             </Button>
           </div>
           <div>
             <Button className="h-14 w-full gap-x-4 rounded-none border-2  border-slate-400 bg-gradient-to-l from-gray-900 to-cyan-900 text-xl  hover:from-cyan-600 ">
-              Cevapla
+              {examType === "informDuringSession" ? "Sıradaki" : "Cevapla"}
               <ArrowBigRightDash size={30} />
             </Button>
           </div>

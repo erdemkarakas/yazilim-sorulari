@@ -17,7 +17,6 @@ import { api } from "@/src/lib/api";
 import { type ExamType, useExamStore } from "@/src/store";
 import { motion } from "framer-motion";
 import { ArrowLeft, Play, TimerOff, Timer, UploadCloud } from "lucide-react";
-import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -56,8 +55,10 @@ export default function TechSessionPage() {
   const handleQuestionCountChange = (count: string) => {
     useExamStore.setState({ selectedQuestionCount: Number(count) });
   };
+
   const handleSessionStart = () => {
     const randomNumbers: number[] = [];
+    const sessionTime = 45 * selectedQuestionCount;
 
     if (!totalQuestionsCount || 10 > totalQuestionsCount) {
       toast({
@@ -80,7 +81,7 @@ export default function TechSessionPage() {
         randomNumbers.push(randomNumber);
       }
     }
-
+    useExamStore.setState({ sessionTime: sessionTime });
     const firstQuestionId = randomNumbers[0];
     useExamStore.setState({ randomQuestionIds: randomNumbers });
     void router.push(
@@ -200,7 +201,7 @@ export default function TechSessionPage() {
                 </Label>
                 <Select
                   onValueChange={handleQuestionCountChange}
-                  defaultValue={"20"}
+                  defaultValue={"10"}
                 >
                   <SelectTrigger className="w-[80px] md:w-[180px]">
                     <SelectValue placeholder="Soru sayısı seç" />

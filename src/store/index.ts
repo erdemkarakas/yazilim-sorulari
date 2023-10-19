@@ -14,6 +14,7 @@ interface ExamStore {
   timerEnabled: boolean;
   randomQuestionIds: number[];
   selectedTechnology: Technology;
+  sessionTime: number;
 }
 
 export const useExamStore = create<ExamStore>(() => ({
@@ -22,9 +23,10 @@ export const useExamStore = create<ExamStore>(() => ({
     technologyAlias: "js",
     technologyName: "JavaScript",
   },
-  selectedQuestionCount: 20,
+  selectedQuestionCount: 10,
   examType: "informDuringSession",
   randomQuestionIds: [],
   soundEnabled: true,
   timerEnabled: false,
+  sessionTime: 450,
 }));

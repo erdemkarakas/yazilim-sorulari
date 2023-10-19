@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { api } from "@/src/lib/api";
 import { useExamStore } from "@/src/store";
@@ -12,18 +12,25 @@ import { Timer } from "lucide-react";
 
 const QuestionPage = () => {
   const router = useRouter();
+  const [currentIndex, setCurrentIndex] = React.useState(1);
   const { questionId } = router.query;
-  const { selectedTechnology, randomQuestionIds } = useExamStore();
+  const {
+    selectedTechnology,
+    randomQuestionIds,
+    sessionTime,
+    timerEnabled,
+    selectedQuestionCount,
+  } = useExamStore();
   const { data: question } = api.questions.getQuestionById.useQuery({
     id: Number(questionId),
     technologyId: selectedTechnology.technologyId,
   });
   const nextQuestion = () => {
-    const currentIndex = randomQuestionIds.findIndex(
+    const currentQuestionIndex = randomQuestionIds.findIndex(
       (qId) => qId == Number(questionId),
     );
 
-    const nextId = randomQuestionIds[currentIndex + 1];
+    const nextId = randomQuestionIds[currentQuestionIndex + 1];
 
     if (nextId) {
       void router
@@ -39,6 +46,19 @@ const QuestionPage = () => {
         });
     }
   };
+  useEffect(() => {
+    setCurrentIndex(
+      randomQuestionIds.findIndex((qId) => qId == Number(questionId)) + 1,
+    );
+    const interval = setInterval(() => {
+      if (useExamStore.getState().sessionTime > 0) {
+        useExamStore.setState({
+          sessionTime: useExamStore.getState().sessionTime - 1,
+        });
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -73,29 +93,34 @@ const QuestionPage = () => {
           </motion.div>
           <div className="absolute left-4 top-2 flex flex-col rounded-xl border-solid text-lg  font-bold text-white md:left-10 md:top-20 md:border-2 md:bg-white md:p-3 md:text-cyan-900">
             <div>
-              <div className="flex flex-row border-solid border-cyan-900 md:border-b-2">
-                <span className="mr-2 hidden  sm:block">Kalan Süre</span>
-                <Timer className="hidden md:block" />
-              </div>
-            </div>
-            <div className="flex">
-              <span>10:00</span>
-            </div>
-          </div>
-
-          <div className="absolute right-4 top-2 flex flex-col rounded-xl border-solid text-lg  font-bold text-white md:right-20  md:top-20 md:border-2 md:bg-white md:p-3 md:text-cyan-900">
-            <div>
               <div className="hidden border-b-2 border-solid border-cyan-900 md:block">
                 <span className="hidden  md:block">Soru:</span>
               </div>
 
               <span>
                 {" "}
-                <span className="text-3xl">1</span> /10
+                <span className="text-3xl">{currentIndex}</span> /{" "}
+                {selectedQuestionCount}
               </span>
             </div>
           </div>
         </div>
+
+        {timerEnabled && (
+          <div className="absolute right-4 top-2 flex flex-col rounded-xl border-solid text-lg  font-bold text-white md:right-20  md:top-20 md:border-2 md:bg-white md:p-3 md:text-cyan-900 ">
+            <div>
+              <div className="flex flex-row border-solid border-cyan-900 md:border-b-2">
+                <span className="mr-2 hidden  text-right sm:block">
+                  Kalan Süre
+                </span>
+                <Timer className="hidden md:block" />
+              </div>
+            </div>
+            <div className="flex justify-end text-right text-2xl">
+              <span>{sessionTime}</span>
+            </div>
+          </div>
+        )}
         <div className="flex w-full  flex-col  items-center px-2 py-2 sm:w-4/6 md:mt-20">
           {question && (
             <QuestionCard
