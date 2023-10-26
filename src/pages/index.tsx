@@ -75,6 +75,7 @@ export default function Home() {
                 alt={"logo"}
                 className="w-[400px] object-contain"
               />
+              <h1 className="text-white">Yapım Aşamasında...</h1>
             </div>
           </motion.div>
 
