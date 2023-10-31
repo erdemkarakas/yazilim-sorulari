@@ -47,15 +47,27 @@ const QuestionCard: React.FC<QuestionProps> = ({
   correctAnswer,
   previewMode = false,
 }) => {
-  const [currentIndex, setCurrentIndex] = React.useState(1);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const { selectedTechnology, examType, randomQuestionIds, soundEnabled } =
-    useExamStore();
+  const {
+    selectedTechnology,
+    examType,
+    randomQuestionIds,
+    soundEnabled,
+    selectedAnswers,
+  } = useExamStore();
   const router = useRouter();
   const { questionId } = router.query;
   const [progress, setProgress] = useState(0);
   const handleAnswer = (key: string) => {
     setSelectedAnswer(key);
+
+    useExamStore.setState({
+      selectedAnswers: {
+        ...useExamStore.getState().selectedAnswers,
+        [questionId as string]: key,
+      },
+    });
   };
   const options = [
     { key: "a", text: answerA },
@@ -63,6 +75,9 @@ const QuestionCard: React.FC<QuestionProps> = ({
     { key: "c", text: answerC },
     { key: "d", text: answerD },
   ];
+  const isQuestionAnswered = selectedAnswers.hasOwnProperty(
+    questionId as string,
+  );
   useEffect(() => {
     const currentIndex = randomQuestionIds.findIndex(
       (qId) => qId == Number(questionId),
@@ -151,25 +166,28 @@ const QuestionCard: React.FC<QuestionProps> = ({
           {options.map((option, index) => (
             <div
               onClick={() => {
-                if (!previewMode) handleAnswer(option.key);
+                if (!previewMode && !isQuestionAnswered)
+                  handleAnswer(option.key);
               }}
               key={index}
-              className="flex flex-row gap-x-[2px]"
+              className={`group flex flex-row gap-x-[2px] ${
+                isQuestionAnswered ? "" : " hover:bg-slate-100"
+              }`}
             >
               <div
                 className={`flex h-full items-center rounded-lg border-2 border-solid px-4 pr-4 text-xl uppercase  ${
                   selectedAnswer === option.key &&
                   selectedAnswer === correctAnswer &&
                   examType === "informDuringSession"
-                    ? "rounded-lg border-2 border-solid border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
+                    ? `rounded-lg border-2 border-solid border-emerald-600 bg-emerald-500 text-white  `
                     : selectedAnswer === option.key &&
                       examType === "informSessionEnd"
                     ? "rounded-lg border-2 border-solid  border-gray-600 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] "
                     : selectedAnswer === option.key &&
                       selectedAnswer !== correctAnswer &&
                       examType === "informDuringSession"
-                    ? "rounded-lg border-2 border-solid border-red-500  bg-red-400 font-semibold  text-white  hover:bg-red-200 "
-                    : "rounded-lg border-2 border-solid hover:bg-slate-100"
+                    ? "rounded-lg border-2 border-solid border-red-500  bg-red-400 font-semibold  text-white "
+                    : "rounded-lg border-2 border-solid "
                 }`}
               >
                 {option.key}.
@@ -179,20 +197,28 @@ const QuestionCard: React.FC<QuestionProps> = ({
                   selectedAnswer === option.key &&
                   selectedAnswer === correctAnswer &&
                   examType === "informDuringSession"
-                    ? "rounded-lg border-2 border-solid  border-emerald-600 bg-emerald-500 text-white hover:bg-emerald-400 "
+                    ? "rounded-lg border-2 border-solid  border-emerald-600 bg-emerald-500 text-white  "
                     : selectedAnswer === option.key &&
                       examType === "informSessionEnd"
                     ? "rounded-lg border-2 border-solid  border-gray-600  shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]  "
                     : selectedAnswer === option.key &&
                       selectedAnswer !== correctAnswer &&
                       examType === "informDuringSession"
-                    ? "rounded-lg border-2 border-solid border-red-500 bg-red-400 font-semibold text-white  hover:bg-red-200 "
-                    : "rounded-lg border-2 border-solid hover:bg-slate-100"
+                    ? "rounded-lg border-2 border-solid border-red-500 bg-red-400 font-semibold text-white "
+                    : "rounded-lg border-2 border-solid "
                 }`}
                 initial={{ scale: 1 }}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.9 }}
-                disabled={previewMode}
+                whileHover={
+                  !previewMode && !isQuestionAnswered
+                    ? { scale: 1.01 }
+                    : undefined
+                }
+                whileTap={
+                  !previewMode && !isQuestionAnswered
+                    ? { scale: 0.9 }
+                    : undefined
+                }
+                disabled={previewMode || isQuestionAnswered}
                 animate={
                   selectedAnswer === option.key &&
                   selectedAnswer !== correctAnswer &&
@@ -251,4 +277,4 @@ const QuestionCard: React.FC<QuestionProps> = ({
   );
 };
 
-export default QuestionCard;
+export default React.memo(QuestionCard);

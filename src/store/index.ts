@@ -15,6 +15,7 @@ interface ExamStore {
   randomQuestionIds: number[];
   selectedTechnology: Technology;
   sessionTime: number;
+  selectedAnswers: number[];
 }
 
 export const useExamStore = create<ExamStore>(() => ({
@@ -29,4 +30,5 @@ export const useExamStore = create<ExamStore>(() => ({
   soundEnabled: true,
   timerEnabled: false,
   sessionTime: 450,
+  selectedAnswers: [],
 }));
