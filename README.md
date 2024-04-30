@@ -1,28 +1,17 @@
-# Create T3 App
+## Software Questions
+Software Questions is a web application where you can test your skills in various programming languages. Users log in to the site, select a programming language, and participate in a session related to that language. During the session, multiple-choice questions are asked regarding the selected language. After answering the questions, users can see how many they answered correctly and incorrectly.
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## Technologies Used
+- [Next.js](https://nextjs.org) : A React-based server-side rendering framework that enables building high-performance and developer-friendly web applications.
+- [NextAuth.js](https://next-auth.js.org): A library for easily adding authentication to Next.js applications.
+- [Prisma](https://prisma.io) An ORM (Object-Relational Mapping) tool used for database access and querying.
+- [Tailwind CSS](https://tailwindcss.com): A utility-first CSS framework that facilitates building modern and responsive web designs.
+- [tRPC](https://trpc.io) A TypeScript-based RPC (Remote Procedure Call) framework that streamlines server-client communication.
 
-## What's next? How do I make an app with this?
-
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Features
+Solve questions in various programming languages and test their skills.
+See the number of correct and incorrect answers at the end of a session.
+Modern and responsive user interface built with Tailwind CSS.
+tRPC optimizes server-client communication and provides type-safe data flow.
+Prisma simplifies database access and management.
+This project is an excellent resource for programming students or developers to practice and test their skills. It can also be beneficial for those who want to learn about different programming languages.
